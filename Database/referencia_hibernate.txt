@@ -1,0 +1,3 @@
+http://javafree.uol.com.br/artigo/874971/Acessando-Dados-com-Java-Parte-3-Hibernate-Annotations.html
+
+http://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html
