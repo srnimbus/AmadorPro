@@ -2,9 +2,12 @@ package br.com.srnimbus.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,7 +41,9 @@ public class UsuarioDAO {
 		this.id = id;
 	}
 
-	@Column(name = "ID_PLANO_PAGAMENTO")
+	// @Column(name = "ID_PLANO_PAGAMENTO")
+	@JoinColumn(name = "ID_PLANO_PAGAMENTO", referencedColumnName = "ID_PLANO_PAGAMENTO", insertable = false, updatable = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	public PlanoPagamentoDAO getPlanoPagamento() {
 		return planoPagamento;
 	}

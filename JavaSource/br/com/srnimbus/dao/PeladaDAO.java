@@ -4,9 +4,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -42,7 +45,9 @@ public class PeladaDAO {
 		this.id = id;
 	}
 
-	@Column(name = "ID_LOCAL_PELADA")
+	// @Column(name = "ID_LOCAL_PELADA")
+	@JoinColumn(name = "ID_LOCAL_PELADA", referencedColumnName = "ID_LOCAL_PELADA", insertable = false, updatable = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	public LocalPeladaDAO getLocal() {
 		return local;
 	}
