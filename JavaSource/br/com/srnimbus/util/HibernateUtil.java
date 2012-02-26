@@ -1,10 +1,18 @@
 package br.com.srnimbus.util;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
+
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
 	static {
-		sessionFactory = new AnnotationConfiguration().configure()
-				.buildSessionFactory();
+		try {
+			sessionFactory = new AnnotationConfiguration().configure()
+					.buildSessionFactory();
+		} catch (Throwable ex) {
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
 	}
 
 	public static SessionFactory getSessionFactory() {

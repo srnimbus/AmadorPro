@@ -3,11 +3,14 @@ package br.com.srnimbus.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_PERFIL")
+@SequenceGenerator(name = "TB_PERFIL_ID_PERFIL_seq", sequenceName = "TB_PERFIL_ID_PERFIL_seq", allocationSize = 1)
 public class PerfilDAO {
 	
 	//"TB_PERFIL","ID_PERFIL"								
@@ -17,8 +20,8 @@ public class PerfilDAO {
 	private String descricao;
 	
 	@Id
-	@GeneratedValue
 	@Column(name = "ID_PERFIL")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_PERFIL_ID_PERFIL_seq")
 	public int getId() {
 		return id;
 	}

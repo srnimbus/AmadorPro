@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        
+        <!-- Propriedades da Conexao -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/amadorpro</property>
+        <property name="hibernate.connection.username">amadorpro</property>
+        <property name="connection.password">123456</property>
+        <property name="connection.pool_size">1</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="show_sql">true</property>
+        <!-- <property name="hbm2ddl.auto">create</property> -->  
+        
+        <!-- Mapeamento das Classes DAO -->
+        <mapping class="br.com.srnimbus.dao.EnderecoDAO" />
+        <mapping class="br.com.srnimbus.dao.LocalPeladaDAO" />
+        <mapping class="br.com.srnimbus.dao.LoginDAO" />
+        <mapping class="br.com.srnimbus.dao.PeladaDAO" />
+        <mapping class="br.com.srnimbus.dao.PerfilDAO" />
+        <mapping class="br.com.srnimbus.dao.PlanoPagamentoDAO" />
+        <mapping class="br.com.srnimbus.dao.TelefoneDAO" />
+        <mapping class="br.com.srnimbus.dao.UsuarioDAO" />
+        
+    </session-factory>
+</hibernate-configuration>

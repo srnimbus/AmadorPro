@@ -3,11 +3,14 @@ package br.com.srnimbus.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ID_LOCAL_PELADA")
+@SequenceGenerator(name = "TB_LOCAL_PELADA_ID_LOCAL_PELADA_seq", sequenceName = "TB_LOCAL_PELADA_ID_LOCAL_PELADA_seq", allocationSize = 1)
 public class LocalPeladaDAO {
 
 	//"TB_LOCAL_PELADA","ID_LOCAL_PELADA"
@@ -23,8 +26,8 @@ public class LocalPeladaDAO {
 	private String telefone;
 	
 	@Id
-	@GeneratedValue
 	@Column(name = "ID_LOCAL_PELADA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_LOCAL_PELADA_ID_LOCAL_PELADA_seq")
 	public int getId() {
 		return id;
 	}

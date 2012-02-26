@@ -3,11 +3,14 @@ package br.com.srnimbus.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_ENDERECO")
+@SequenceGenerator(name = "TB_ENDERECO_ID_ENDERECO_seq", sequenceName = "TB_ENDERECO_ID_ENDERECO_seq", allocationSize = 1)
 public class EnderecoDAO {
 
 	// "TB_ENDERECO","ID_ENDERECO"
@@ -21,8 +24,8 @@ public class EnderecoDAO {
 	private String cep;
 
 	@Id
-	@GeneratedValue
 	@Column(name = "ID_ENDERECO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_ENDERECO_ID_ENDERECO_seq")
 	public int getId() {
 		return id;
 	}
@@ -31,8 +34,7 @@ public class EnderecoDAO {
 		this.id = id;
 	}
 
-
-	@Column(name = "PRINCIPAL")	
+	@Column(name = "PRINCIPAL")
 	public boolean isPrincipal() {
 		return principal;
 	}
