@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_PERFIL")
 @SequenceGenerator(name = "TB_PERFIL_ID_PERFIL_seq", sequenceName = "TB_PERFIL_ID_PERFIL_seq", allocationSize = 1)
-public class PerfilDAO {
+public class Perfil {
 	
 	//"TB_PERFIL","ID_PERFIL"								
 	//"TB_PERFIL","DESC_PERFIL"								

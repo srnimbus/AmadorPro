@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ID_LOCAL_PELADA")
 @SequenceGenerator(name = "TB_LOCAL_PELADA_ID_LOCAL_PELADA_seq", sequenceName = "TB_LOCAL_PELADA_ID_LOCAL_PELADA_seq", allocationSize = 1)
-public class LocalPeladaDAO {
+public class LocalPelada {
 
 	//"TB_LOCAL_PELADA","ID_LOCAL_PELADA"
 	//"TB_LOCAL_PELADA","DESC_LOCAL"

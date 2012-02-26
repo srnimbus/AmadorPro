@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_PLANO_PAGAMENTO")
 @SequenceGenerator(name = "TB_PLANO_PAGAMENTO_ID_PLANO_PAGAMENTO_seq", sequenceName = "TB_PLANO_PAGAMENTO_ID_PLANO_PAGAMENTO_seq", allocationSize = 1)
-public class PlanoPagamentoDAO {
+public class PlanoPagamento {
 
 	// "TB_PLANO_PAGAMENTO","ID_PLANO_PAGAMENTO"
 	// "TB_PLANO_PAGAMENTO","DESC_PLANO"

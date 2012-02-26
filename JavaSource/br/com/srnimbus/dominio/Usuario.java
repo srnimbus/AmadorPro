@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_USUARIO")
 @SequenceGenerator(name = "TB_USUARIO_ID_USUARIO_seq", sequenceName = "TB_USUARIO_ID_USUARIO_seq", allocationSize = 1)
-public class UsuarioDAO {
+public class Usuario {
 
 	// "TB_USUARIO","ID_USUARIO"
 	// "TB_USUARIO","ID_PLANO_PAGAMENTO"
@@ -24,7 +24,7 @@ public class UsuarioDAO {
 	// "TB_USUARIO","EMAIL"
 
 	private int id;
-	private PlanoPagamentoDAO planoPagamento;
+	private PlanoPagamento planoPagamento;
 	private String nome;
 	private String cpf;
 	private String apelido;
@@ -44,11 +44,11 @@ public class UsuarioDAO {
 	// @Column(name = "ID_PLANO_PAGAMENTO")
 	@JoinColumn(name = "ID_PLANO_PAGAMENTO", referencedColumnName = "ID_PLANO_PAGAMENTO", insertable = false, updatable = false)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	public PlanoPagamentoDAO getPlanoPagamento() {
+	public PlanoPagamento getPlanoPagamento() {
 		return planoPagamento;
 	}
 
-	public void setPlanoPagamento(PlanoPagamentoDAO planoPagamento) {
+	public void setPlanoPagamento(PlanoPagamento planoPagamento) {
 		this.planoPagamento = planoPagamento;
 	}
 

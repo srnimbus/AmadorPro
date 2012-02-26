@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import java.sql.Date;
 
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_PELADA")
 @SequenceGenerator(name = "TB_PELADA_ID_PELADA_seq", sequenceName = "TB_PELADA_ID_PELADA_seq", allocationSize = 1)
-public class PeladaDAO {
+public class Pelada {
 
 	// "TB_PELADA","ID_PELADA"
 	// "TB_PELADA","ID_LOCAL_PELADA"
@@ -27,7 +27,7 @@ public class PeladaDAO {
 	// "TB_PELADA","HORA_INICIAL"
 
 	private int id;
-	private LocalPeladaDAO local;
+	private LocalPelada local;
 	private String descricao;
 	private Date data;
 	private double valor;
@@ -48,11 +48,11 @@ public class PeladaDAO {
 	// @Column(name = "ID_LOCAL_PELADA")
 	@JoinColumn(name = "ID_LOCAL_PELADA", referencedColumnName = "ID_LOCAL_PELADA", insertable = false, updatable = false)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	public LocalPeladaDAO getLocal() {
+	public LocalPelada getLocal() {
 		return local;
 	}
 
-	public void setLocal(LocalPeladaDAO local) {
+	public void setLocal(LocalPelada local) {
 		this.local = local;
 	}
 

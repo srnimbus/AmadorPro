@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_LOGIN")
 @SequenceGenerator(name = "TB_LOGIN_ID_LOGIN_seq", sequenceName = "TB_LOGIN_ID_LOGIN_seq", allocationSize = 1)
-public class LoginDAO {
+public class Login {
 
 	// "TB_LOGIN","ID_LOGIN"
 	// "TB_LOGIN","ID_USUARIO"
@@ -22,7 +22,7 @@ public class LoginDAO {
 	// "TB_LOGIN","SENHA"
 
 	private int id;
-	private UsuarioDAO usuario;
+	private Usuario usuario;
 	private String login;
 	private String senha;
 
@@ -40,11 +40,11 @@ public class LoginDAO {
 	// @Column(name = "ID_USUARIO")
 	@JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	public UsuarioDAO getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(UsuarioDAO usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

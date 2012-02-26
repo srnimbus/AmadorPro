@@ -1,4 +1,4 @@
-package br.com.srnimbus.dao;
+package br.com.srnimbus.dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_TELEFONE")
 @SequenceGenerator(name = "TB_TELEFONE_ID_TELEFONE_seq", sequenceName = "TB_TELEFONE_ID_TELEFONE_seq", allocationSize = 1)
-public class TelefoneDAO {
+public class Telefone {
 
 	// "TB_TELEFONE","ID_TELEFONE"
 	// "TB_TELEFONE","PRINCIPAL"
