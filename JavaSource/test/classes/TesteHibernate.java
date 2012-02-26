@@ -10,15 +10,13 @@ import br.com.srnimbus.util.HibernateUtil;
 public class TesteHibernate {
 
 	public static void main(String[] args) {
-		int tel = 0;
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Transaction t = sessao.beginTransaction();
 		for (int j = 0; j <= 100; j++) {
-			tel = (int) (Math.random() * 100000000);
+			Transaction t = sessao.beginTransaction();
 
 			TelefoneDAO telefone = new TelefoneDAO();
 			telefone.setPrincipal(true);
-
+			int tel = (int) (Math.random() * 100000000);
 			telefone.setTelefone(Integer.toString(tel));
 
 			sessao.save(telefone);
