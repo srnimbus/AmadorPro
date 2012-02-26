@@ -28,6 +28,7 @@ public class HibernateUtil {
 		Transaction transacao = sessao.beginTransaction();
 		sessao.save(objetoHibernate);
 		transacao.commit();
+		sessao.close();
 	}
 
 	public static void update(Object objetoHibernate) {
@@ -35,6 +36,7 @@ public class HibernateUtil {
 		Transaction transacao = sessao.beginTransaction();
 		sessao.update(objetoHibernate);
 		transacao.commit();
+		sessao.close();
 	}
 
 	public static void delete(Object objetoHibernate) {
@@ -42,6 +44,7 @@ public class HibernateUtil {
 		Transaction transacao = sessao.beginTransaction();
 		sessao.delete(objetoHibernate);
 		transacao.commit();
+		sessao.close();
 	}
 
 }

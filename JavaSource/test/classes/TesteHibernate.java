@@ -1,8 +1,5 @@
 package test.classes;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import br.com.srnimbus.dao.TelefoneDAO;
 import br.com.srnimbus.util.HibernateUtil;
 
@@ -10,19 +7,19 @@ import br.com.srnimbus.util.HibernateUtil;
 public class TesteHibernate {
 
 	public static void main(String[] args) {
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		for (int j = 0; j <= 100; j++) {
-			Transaction t = sessao.beginTransaction();
+		//for (int j = 0; j <= 100; j++) {
 
 			TelefoneDAO telefone = new TelefoneDAO();
-			telefone.setPrincipal(true);
-			int tel = (int) (Math.random() * 100000000);
-			telefone.setTelefone(Integer.toString(tel));
+			telefone.setId(207);
+			
 
-			sessao.save(telefone);
-			t.commit();
-		}
-		sessao.close();
+			//HibernateUtil.insert(telefone);
+			//HibernateUtil.update(telefone);
+			HibernateUtil.delete(telefone);
+			
+			
+
+		//}
 
 	}
 
