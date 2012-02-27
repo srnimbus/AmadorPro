@@ -1,5 +1,6 @@
 package br.com.srnimbus.util;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,7 +13,7 @@ public class HibernateUtil {
 	static {
 		try {
 			sessionFactory = new AnnotationConfiguration().configure()
-					.buildSessionFactory(); //documentacao desatualizada
+					.buildSessionFactory(); // documentacao desatualizada
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
@@ -47,4 +48,11 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
+	public static <T> Object load(Class<T> klazzHibernate, int id) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Hibernate.initialize(klazzHibernate);
+		Object retorno = sessao.load(klazzHibernate, id);
+		sessao.close();
+		return retorno;
+	}
 }

@@ -7,19 +7,22 @@ import br.com.srnimbus.util.HibernateUtil;
 public class TesteHibernate {
 
 	public static void main(String[] args) {
-		//for (int j = 0; j <= 100; j++) {
+		// for (int j = 0; j <= 100; j++) {
 
-			Telefone telefone = new Telefone();
-			telefone.setId(207);
-			
+		Telefone telefone = new Telefone();
+		// telefone.setPrincipal(true);
+		// telefone.setTelefone("12345678");
 
-			//HibernateUtil.insert(telefone);
-			//HibernateUtil.update(telefone);
-			HibernateUtil.delete(telefone);
-			
-			
+		// HibernateUtil.insert(telefone);
+		// HibernateUtil.update(telefone);
+		// HibernateUtil.delete(telefone);
 
-		//}
+		Telefone telefone2 = (Telefone) (HibernateUtil
+				.load(Telefone.class, 208));
+
+		System.out.println(telefone2.getTelefone());
+
+		// }
 
 	}
 

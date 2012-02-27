@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_TELEFONE")
 @SequenceGenerator(name = "TB_TELEFONE_ID_TELEFONE_seq", sequenceName = "TB_TELEFONE_ID_TELEFONE_seq", allocationSize = 1)
-public class Telefone {
+public class Telefone{
 
 	// "TB_TELEFONE","ID_TELEFONE"
 	// "TB_TELEFONE","PRINCIPAL"

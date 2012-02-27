@@ -16,14 +16,14 @@
         <!-- <property name="hbm2ddl.auto">create</property> -->  
         
         <!-- Mapeamento das Classes DAO -->
-        <mapping class="br.com.srnimbus.dao.EnderecoDAO" />
-        <mapping class="br.com.srnimbus.dao.LocalPeladaDAO" />
-        <mapping class="br.com.srnimbus.dao.LoginDAO" />
-        <mapping class="br.com.srnimbus.dao.PeladaDAO" />
-        <mapping class="br.com.srnimbus.dao.PerfilDAO" />
-        <mapping class="br.com.srnimbus.dao.PlanoPagamentoDAO" />
-        <mapping class="br.com.srnimbus.dao.TelefoneDAO" />
-        <mapping class="br.com.srnimbus.dao.UsuarioDAO" />
+        <mapping class="br.com.srnimbus.dominio.Endereco" />
+        <mapping class="br.com.srnimbus.dominio.LocalPelada" />
+        <mapping class="br.com.srnimbus.dominio.Login" />
+        <mapping class="br.com.srnimbus.dominio.Pelada" />
+        <mapping class="br.com.srnimbus.dominio.Perfil" />
+        <mapping class="br.com.srnimbus.dominio.PlanoPagamento" />
+        <mapping class="br.com.srnimbus.dominio.Telefone" />
+        <mapping class="br.com.srnimbus.dominio.Usuario" />
         
     </session-factory>
 </hibernate-configuration>
