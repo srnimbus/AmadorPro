@@ -15,7 +15,7 @@
         <property name="show_sql">true</property>
         <!-- <property name="hbm2ddl.auto">create</property> -->  
         
-        <!-- Mapeamento das Classes DAO -->
+        <!-- Mapeamento das Classes Dominio -->
         <mapping class="br.com.srnimbus.dominio.Endereco" />
         <mapping class="br.com.srnimbus.dominio.LocalPelada" />
         <mapping class="br.com.srnimbus.dominio.Login" />

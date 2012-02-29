@@ -4,7 +4,7 @@ import br.com.srnimbus.dao.ILoginDAO;
 import br.com.srnimbus.dominio.Login;
 import br.com.srnimbus.util.HibernateUtil;
 
-public class ILoginDAOImpl implements ILoginDAO {
+public class LoginDAOImpl implements ILoginDAO {
 
 	@Override
 	public void insert(Login login) {
