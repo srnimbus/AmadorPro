@@ -24,4 +24,14 @@ public class LoginDAOImpl implements ILoginDAO {
 
 	}
 
+	public String getHashSenha(Login login) {
+
+		// ajustar no banco para o login ser chave composta
+		// Login retorno = (Login) HibernateUtil.load(Login.class,
+		// login.getLogin());
+
+		return "";
+
+	}
+
 }

@@ -10,6 +10,6 @@ public interface ILoginDAO {
 	
 	public void delete(Login login);
 	
-	
+	public String getHashSenha(Login login);
 }
 
