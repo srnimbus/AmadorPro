@@ -1,4 +1,4 @@
-package br.com.srnimbus.controller;
+package br.com.srnimbus.mvc;
 
 public class LocalPeladaBean {
 

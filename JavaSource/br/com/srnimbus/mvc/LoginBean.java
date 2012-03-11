@@ -1,8 +1,13 @@
-package br.com.srnimbus.controller;
+package br.com.srnimbus.mvc;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean(name = "loginBean")
+@RequestScoped
 public class LoginBean {
 
-	private String login;
+	private String login = "Didizao The Legend";
 	private String senha;
 
 	public String getLogin() {
