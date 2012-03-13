@@ -33,15 +33,25 @@ public class CryptoUtil {
 
 	private static final int RSAKEYSIZE = 1024;
 
-	public String getHashMD5(String clearText) throws AmadorProException {
+	public static String hash(String string) {  
+        int hash = 1;  
+        int prime = 31;  
+        char[] array = string.toCharArray();  
+        for (int i = 0; i < array.length; i++) {  
+           hash = prime * hash + array[i];  
+        }  
+        return Integer.toHexString(prime + hash).toUpperCase();  
+     }  
+	
+	public static String getHashMD5(String clearText) throws AmadorProException {
 		return getHash(clearText, "MD5");
 	}
 
-	public String getHashSHA2(String clearText) throws AmadorProException {
+	public static String getHashSHA2(String clearText) throws AmadorProException {
 		return getHash(clearText, "SHA-256");
 	}
 
-	private String getHash(String clearText, String instance) throws AmadorProException {
+	private static String getHash(String clearText, String instance) throws AmadorProException {
 
 		MessageDigest md;
 		String retorno;
@@ -67,7 +77,7 @@ public class CryptoUtil {
 
 	// ==========
 
-	public byte[][] crypt(PublicKey pubKey, byte[] clearText) throws NoSuchAlgorithmException, NoSuchPaddingException,
+	public static byte[][] crypt(PublicKey pubKey, byte[] clearText) throws NoSuchAlgorithmException, NoSuchPaddingException,
 			InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
 		byte[] cipheredText = null;
 		byte[] cipheredKey = null;
@@ -90,7 +100,7 @@ public class CryptoUtil {
 		return new byte[][] { cipheredText, cipheredKey };
 	}
 
-	public byte[] decrypt(PrivateKey pvtKey, byte[] cipheredText, byte[] cipheredKey) throws NoSuchAlgorithmException,
+	public static byte[] decrypt(PrivateKey pvtKey, byte[] cipheredText, byte[] cipheredKey) throws NoSuchAlgorithmException,
 			NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
 			InvalidAlgorithmParameterException {
 		byte[] decipheredText = null;
@@ -110,21 +120,21 @@ public class CryptoUtil {
 
 	// ==========
 
-	public PublicKey loadPublicKey(File pubKeyFile) throws IOException, ClassNotFoundException {
+	public static PublicKey loadPublicKey(File pubKeyFile) throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pubKeyFile));
 		PublicKey ret = (PublicKey) ois.readObject();
 		ois.close();
 		return ret;
 	}
 
-	public PrivateKey loadPrivateKey(File pvtKeyFile) throws IOException, ClassNotFoundException {
+	public static PrivateKey loadPrivateKey(File pvtKeyFile) throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pvtKeyFile));
 		PrivateKey ret = (PrivateKey) ois.readObject();
 		ois.close();
 		return ret;
 	}
 
-	public void generatePairKeys(File pubKeyFile, File pvtKeyFile) throws IOException, NoSuchAlgorithmException,
+	public static void generatePairKeys(File pubKeyFile, File pvtKeyFile) throws IOException, NoSuchAlgorithmException,
 			InvalidAlgorithmParameterException, CertificateException, KeyStoreException {
 
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
