@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Amador Pro</title>
+<script src="js/jquery.js"></script>
+<script src="js/alerts.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/tabs.js"></script>
+
+<link href="css/style.css" rel="stylesheet" />
+<style type="text/css">
+body {
+	padding-top: 60px;
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Amador Pro</a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <img src="pics/locker.gif" alt="Watermark" height="277" width="219" />
+        </div>
+      </div>
+      <div class="content">
+        <div class="page-header">
+          <h1>Login</h1>
+        </div>
+        
+        <div class="row">
+          <div class="span6">
+            <h:form styleClass="form-stacked">
+              <fieldset>
+                
+                <div class="clearfix">
+                  <label for="xlInput">Usuário</label>
+                  <div class="input">
+                    <h:inputText id="login"  name="login" value="#{loginBean.login}" size="30"
+											styleClass="xlarge" />
+                  </div>
+                </div>
+                
+                <div class="clearfix">
+                  <label for="xlInput">Senha</label>
+                  <div class="input">
+                    <h:inputText id="senha" name="senha" value="#{loginBean.senha}" size="30"
+											styleClass="xlarge" />
+                    <span class="help-block">Esqueceu a senha? <a href="#">Clique aqui</a></span>
+                  </div>
+                </div>
+                
+                <div class="actions">
+                  <button type="submit" class="btn primary">Acessar</button>&nbsp;
+                  <button type="submit" class="btn">Cancelar</button>&nbsp;
+                </div>
+                        
+          </fieldset>
+        </h:form>
+      </div>
+    </div>
+    <footer>
+      <p>© Amador Pro - All Lefts Deserved</p>
+    </footer>
+    </div>
+  </div></body>
+</html>

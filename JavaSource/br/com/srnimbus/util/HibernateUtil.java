@@ -48,7 +48,7 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
-	public static  Object load(Class klazzHibernate, int id) {
+	public static  Object load(Class<?> klazzHibernate, int id) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Hibernate.initialize(klazzHibernate);
 		Object retorno = sessao.load(klazzHibernate, id);

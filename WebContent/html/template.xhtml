@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Amador Pro</title>
+<script src="js/jquery.js"></script>
+<script src="js/alerts.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/tabs.js"></script>
+
+<link href="css/style.css" rel="stylesheet" />
+<style type="text/css">
+body {
+	padding-top: 60px;
+}
+</style>
+</head>
+<body>
+	<div class="topbar">
+		<div class="topbar-inner">
+			<div class="container-fluid">
+				<a class="brand" href="#">Amador Pro</a>
+				<ul class="nav">
+					<li class="active"><a href="#">Menu ativo</a></li>
+					<li><a href="#">Menu 2</a></li>
+					<li><a href="#">Menu 3</a></li>
+					<li><a href="#">Menu 4</a></li>
+					<li><a href="#">Menu 5</a></li>
+				</ul>
+				<p class="pull-right">
+					<a href="#">Usuário logado</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="sidebar">
+			<div class="well">
+				<h5>Título menu</h5>
+				<ul>
+					<li><a href="#">Submenu 1</a></li>
+					<li><a href="#">Submenu 2</a></li>
+					<li><a href="#">Submenu 3</a></li>
+					<li><a href="#">Submenu 4</a></li>
+					<li><a href="#">Submenu 5</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="page-header">
+				<h1>Título menu</h1>
+			</div>
+			<div class="row">
+				<div class="span16">
+					<ul class="tabs" data-tabs="tabs">
+						<li class="active"><a href="#aba1">Aba 1</a></li>
+						<li><a href="#aba2">Aba 2</a></li>
+						<li><a href="#aba3">Aba 3</a></li>
+						<li><a href="#aba4">Aba 4</a></li>
+						<li><a href="#aba5">Aba 5</a></li>
+					</ul>
+					<div id="my-tab-content" class="tab-content">
+						<div class="active tab-pane" id="aba1">
+							<p>Aba 1</p>
+							<h:form styleClass="form-stacked">
+								<div class="clearfix">
+									<label for="xlInput">Usuário</label>
+									<div class="input">
+										<h:inputText id="login" value="#{loginBean.login}" size="30"
+											styleClass="xlarge" />
+									</div>
+									<label for="xlInput">Senha</label>
+									<div class="input">
+										<h:inputText id="senha" value="#{loginBean.senha}" size="30"
+											styleClass="xlarge error" />
+									</div>
+								</div>
+							</h:form>
+						</div>
+						<div class="tab-pane" id="aba2">
+							<p>Aba 2</p>
+						</div>
+						<div class="tab-pane" id="aba3">
+							<p>Aba 3</p>
+						</div>
+						<div class="tab-pane" id="aba4">
+							<p>Aba 4</p>
+						</div>
+						<div class="tab-pane" id="aba5">
+							<p>Aba 5</p>
+						</div>
+					</div>
+
+  <div id="modal-from-dom" class="modal hide fade">
+                <div class="modal-header">
+                  <a href="#" class="close">×</a>
+                  <h3>Título da mensagem</h3>
+                </div>
+                <div class="modal-body">
+                  <p>Mensagem de erro, confirmação, etc</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="btn primary">Ok</a>
+                  <a href="#" class="btn secondary">Cancelar</a>
+                </div>
+              </div>
+              
+              <div class="actions">
+                <button type="submit" class="btn primary">Botão destaque</button>&nbsp;
+                <button type="submit" class="btn">Botão normal</button>&nbsp;
+                <button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn danger">Visualizar modal</button>
+              </div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

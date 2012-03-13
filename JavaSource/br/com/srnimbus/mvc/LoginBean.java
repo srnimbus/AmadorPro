@@ -7,7 +7,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class LoginBean {
 
-	private String login = "Didizao The Legend";
+	private String login;
 	private String senha;
 
 	public String getLogin() {
