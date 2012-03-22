@@ -55,26 +55,24 @@ public class HibernateUtil {
 
 	public static Object load(Class<?> klazzHibernate, int id) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		// Transaction transacao = sessao.beginTransaction();
 		Object retorno = null;
 		try {
 			retorno = sessao.load(klazzHibernate, id);
 		} finally {
-			sessao.close();
+			// observar como fazer para o hibernate nao fechar a sessao
+			// sessao.close();
 		}
-		// sessao.close();
-		// transacao.commit();
 		return retorno;
 	}
 
-	//LAB
+	// LAB??
 	@SuppressWarnings("unchecked")
 	public static List<Object> findAll(String klazzname) throws AmadorProException {
 		List<Object> objects = null;
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Transaction transacao = sessao.beginTransaction();
-			Query query = sessao.createQuery("from" + klazzname);
+			Query query = sessao.createQuery("from " + klazzname);
 			objects = query.list();
 			transacao.commit();
 		} catch (HibernateException e) {
@@ -85,6 +83,7 @@ public class HibernateUtil {
 		return objects;
 	}
 
+	// LAB??
 	public static List<Object> loadById(Class<?> klazzname, int id) throws AmadorProException {
 		List<Object> objects = null;
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -93,8 +92,8 @@ public class HibernateUtil {
 		} catch (HibernateException e) {
 			throw new AmadorProException(e);
 		} finally {
-			//observar como fazer para o hibernate nao fechar a sessao
-			//sessao.close();
+			// observar como fazer para o hibernate nao fechar a sessao
+			// sessao.close();
 		}
 		return objects;
 	}
