@@ -1,7 +1,7 @@
 package test.classes;
 
-import br.com.srnimbus.dominio.Telefone;
-import br.com.srnimbus.util.HibernateUtil;
+import br.com.srnimbus.amadorpro.dominio.Telefone;
+import br.com.srnimbus.amadorpro.util.HibernateUtil;
 
 //Classe de teste para mapeamento e conexao Hibernate
 public class TesteHibernate {
