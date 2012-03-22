@@ -1,10 +1,15 @@
 package br.com.srnimbus.amadorpro.util;
 
-import org.hibernate.Hibernate;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+
+import br.com.srnimbus.amadorpro.exception.AmadorProException;
 
 @SuppressWarnings("deprecation")
 public class HibernateUtil {
@@ -12,8 +17,8 @@ public class HibernateUtil {
 
 	static {
 		try {
-			sessionFactory = new AnnotationConfiguration().configure()
-					.buildSessionFactory(); // documentacao desatualizada
+			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory(); // documentacao
+																								// desatualizada
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
@@ -48,11 +53,49 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
-	public static  Object load(Class<?> klazzHibernate, int id) {
+	public static Object load(Class<?> klazzHibernate, int id) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Hibernate.initialize(klazzHibernate);
-		Object retorno = sessao.load(klazzHibernate, id);
-		sessao.close();
+		// Transaction transacao = sessao.beginTransaction();
+		Object retorno = null;
+		try {
+			retorno = sessao.load(klazzHibernate, id);
+		} finally {
+			sessao.close();
+		}
+		// sessao.close();
+		// transacao.commit();
 		return retorno;
+	}
+
+	//LAB
+	@SuppressWarnings("unchecked")
+	public static List<Object> findAll(String klazzname) throws AmadorProException {
+		List<Object> objects = null;
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction transacao = sessao.beginTransaction();
+			Query query = sessao.createQuery("from" + klazzname);
+			objects = query.list();
+			transacao.commit();
+		} catch (HibernateException e) {
+			throw new AmadorProException(e);
+		} finally {
+			sessao.close();
+		}
+		return objects;
+	}
+
+	public static List<Object> loadById(Class<?> klazzname, int id) throws AmadorProException {
+		List<Object> objects = null;
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		try {
+			sessao.load(klazzname, id);
+		} catch (HibernateException e) {
+			throw new AmadorProException(e);
+		} finally {
+			//observar como fazer para o hibernate nao fechar a sessao
+			//sessao.close();
+		}
+		return objects;
 	}
 }
