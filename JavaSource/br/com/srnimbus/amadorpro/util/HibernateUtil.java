@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import br.com.srnimbus.amadorpro.exception.AmadorProException;
+import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
 
 @SuppressWarnings("deprecation")
 public class HibernateUtil {
@@ -17,8 +17,8 @@ public class HibernateUtil {
 
 	static {
 		try {
-			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory(); // documentacao
-																								// desatualizada
+			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory(); 
+			// documentacao desatualizada
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
@@ -29,7 +29,7 @@ public class HibernateUtil {
 		return sessionFactory;
 	}
 
-	public static void insert(Object objetoHibernate) {
+	public static void insert(Object objetoHibernate) throws AmadorProDAOException {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = sessao.beginTransaction();
 		sessao.save(objetoHibernate);
@@ -37,7 +37,7 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
-	public static void update(Object objetoHibernate) {
+	public static void update(Object objetoHibernate) throws AmadorProDAOException {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = sessao.beginTransaction();
 		sessao.update(objetoHibernate);
@@ -45,7 +45,7 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
-	public static void delete(Object objetoHibernate) {
+	public static void delete(Object objetoHibernate) throws AmadorProDAOException {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = sessao.beginTransaction();
 		sessao.delete(objetoHibernate);
@@ -53,21 +53,9 @@ public class HibernateUtil {
 		sessao.close();
 	}
 
-	public static Object load(Class<?> klazzHibernate, int id) {
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Object retorno = null;
-		try {
-			retorno = sessao.load(klazzHibernate, id);
-		} finally {
-			// observar como fazer para o hibernate nao fechar a sessao
-			// sessao.close();
-		}
-		return retorno;
-	}
-
 	// LAB??
 	@SuppressWarnings("unchecked")
-	public static List<Object> findAll(String klazzname) throws AmadorProException {
+	public static List<Object> findAll(String klazzname) throws AmadorProDAOException {
 		List<Object> objects = null;
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -76,7 +64,7 @@ public class HibernateUtil {
 			objects = query.list();
 			transacao.commit();
 		} catch (HibernateException e) {
-			throw new AmadorProException(e);
+			throw new AmadorProDAOException(e);
 		} finally {
 			sessao.close();
 		}
@@ -84,13 +72,13 @@ public class HibernateUtil {
 	}
 
 	// LAB??
-	public static List<Object> loadById(Class<?> klazzname, int id) throws AmadorProException {
+	public static List<Object> loadById(Class<?> klazzname, int id) throws AmadorProDAOException {
 		List<Object> objects = null;
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		try {
 			sessao.load(klazzname, id);
 		} catch (HibernateException e) {
-			throw new AmadorProException(e);
+			throw new AmadorProDAOException(e);
 		} finally {
 			// observar como fazer para o hibernate nao fechar a sessao
 			// sessao.close();

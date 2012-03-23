@@ -8,8 +8,10 @@ import br.com.srnimbus.amadorpro.business.ILoginDelegate;
 import br.com.srnimbus.amadorpro.dao.ILoginDAO;
 import br.com.srnimbus.amadorpro.dao.impl.LoginDAOImpl;
 import br.com.srnimbus.amadorpro.dominio.Login;
+import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.mvc.LoginBean;
+import br.com.srnimbus.amadorpro.to.LoginTO;
 
 public class LoginDelegateImpl implements ILoginDelegate {
 
@@ -41,5 +43,35 @@ public class LoginDelegateImpl implements ILoginDelegate {
 		return retorno;
 
 		// loginDAO.update(login);
+	}
+
+	@Override
+	public boolean insert(LoginTO to) throws AmadorProBusinessException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public LoginTO update(LoginTO to) throws AmadorProBusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(LoginTO to) throws AmadorProBusinessException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public LoginTO read(LoginTO to) throws AmadorProBusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LoginTO findAll(LoginTO to) throws AmadorProBusinessException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

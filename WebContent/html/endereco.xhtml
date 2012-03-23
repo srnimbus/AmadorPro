@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Amador Pro</title>
+<script src="js/jquery.js"></script>
+<script src="js/alerts.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/tabs.js"></script>
+
+<link href="css/style.css" rel="stylesheet" />
+<style type="text/css">
+body {
+	padding-top: 60px;
+}
+</style>
+</head>
+<body>
+	<div>
+		<h:form>
+			<div class="clearfix">
+				<label for="xlInput">Endereço</label>
+				<div class="input">
+					<h:inputText id="endereco" name="endereco"
+						value="#{enderecoBean.endereco}" size="30" styleClass="xlarge" />
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<label for="xlInput">CEP</label>
+				<div class="input">
+					<h:inputText id="cep" name="cep" value="#{enderecoBean.cep}"
+						size="30" styleClass="xlarge" />
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<label for="xlInput">Principal</label>
+				<div class="input">
+					<h:selectBooleanCheckbox id="principal" name="principal"
+						value="#{enderecoBean.principal}" />
+				</div>
+			</div>
+
+
+			<div>
+				<p:dataTable value="#{enderecoBean.lista}" var="to"
+					id="EnderecoTable">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Endereco" />
+						</f:facet>
+						<h:outputText value="#{to.endereco}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="CEP" />
+						</f:facet>
+						<h:outputText value="#{to.cep}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Principal" />
+						</f:facet>
+						<h:outputText value="#{to.principal}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+
+
+			<div class="actions">
+				<h:commandButton value="Insert" type="submit" class="btn primary"
+					action="#{enderecoBean.insert}" />
+				&nbsp;
+				<h:commandButton value="Find All" type="submit" class="btn primary"
+					action="#{enderecoBean.findAll}" />
+				&nbsp;
+				<button type="submit" class="btn">Cancelar</button>
+				&nbsp;
+			</div>
+
+		</h:form>
+	</div>
+	<footer>
+	<p>© Amador Pro - All Lefts Deserved</p>
+	</footer>
+</body>
+</html>

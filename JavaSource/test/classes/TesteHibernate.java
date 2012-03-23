@@ -1,10 +1,6 @@
 package test.classes;
 
-import java.util.List;
-
-import br.com.srnimbus.amadorpro.dominio.Telefone;
-import br.com.srnimbus.amadorpro.exception.AmadorProException;
-import br.com.srnimbus.amadorpro.util.HibernateUtil;
+import java.util.TimeZone;
 
 //Classe de teste para mapeamento e conexao Hibernate
 public class TesteHibernate {
@@ -26,16 +22,18 @@ public class TesteHibernate {
 
 		// }
 
-		List<Object> telefones = null;
-		try {
-			telefones = HibernateUtil.findAll("Telefone");
-		} catch (AmadorProException e) {
-		}
-		for (Object tel : telefones)
-			System.out.println(((Telefone) tel).getTelefone());
+		// List<Object> telefones = null;
+		// try {
+		// telefones = HibernateUtil.findAll(Endereco.class.getName());
+		// } catch (AmadorProException e) {
+		// }
+		// for (Object tel : telefones)
+		// System.out.println(((Telefone) tel).getTelefone());
 
-//		Telefone tel = (Telefone) HibernateUtil.load(Telefone.class, 210);
-//		System.out.println(tel.getTelefone());
+		// Telefone tel = (Telefone) HibernateUtil.load(Telefone.class, 210);
+		// System.out.println(tel.getTelefone());
+
+		System.out.println(TimeZone.getDefault());
 
 	}
 }
