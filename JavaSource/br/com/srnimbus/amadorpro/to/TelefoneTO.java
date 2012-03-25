@@ -1,19 +1,10 @@
 package br.com.srnimbus.amadorpro.to;
 
 
-public class TelefoneTO {
+public class TelefoneTO extends AbstractTO{
 
-	private int id;
 	private boolean principal;
 	private String telefone;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public boolean isPrincipal() {
 		return principal;
