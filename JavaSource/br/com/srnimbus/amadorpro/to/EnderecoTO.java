@@ -1,20 +1,11 @@
 package br.com.srnimbus.amadorpro.to;
 
 
-public class EnderecoTO {
-
-	private int id;
+public class EnderecoTO extends AbstractTO {
+	
 	private boolean principal;
 	private String endereco;
 	private String cep;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public boolean isPrincipal() {
 		return principal;

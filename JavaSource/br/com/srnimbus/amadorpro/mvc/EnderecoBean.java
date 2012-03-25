@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -14,51 +15,75 @@ import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.to.EnderecoTO;
 
 @ManagedBean(name = "enderecoBean")
-@RequestScoped
-public class EnderecoBean {
+@SessionScoped
+public class EnderecoBean extends AbstractBean {
 
 	int id;
 	private boolean principal;
 	private String endereco;
 	private String cep;
-	private List<EnderecoTO> lista;
+	private EnderecoTO selecionadoTO;
+	private IEnderecoDelegate delegate;
 
-	public boolean insert() throws IllegalAccessException, InvocationTargetException {
+	@Override
+	public void insert(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException,
+			AmadorProBusinessException {
 
-		IEnderecoDelegate delegate = new EnderecoDelegateImpl();
-		EnderecoTO to = new EnderecoTO();
-		BeanUtils.copyProperties(to, this);
+		if (validateForm()) {
+			EnderecoTO to = new EnderecoTO();
+			BeanUtils.copyProperties(to, this);
+			getDelegate().insert(to);
+			addMessagePagePanel("Endereço inserido com sucesso.");
+		}
+	}
 
-		try {
-			delegate.insert(to);
-		} catch (AmadorProBusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void findAll(ActionEvent actionEvent) throws AmadorProBusinessException {
+		List listaTO = getDelegate().findAll(new EnderecoTO());
+		setDataModel(listaTO);
+		addMessagePagePanel("Todos os endereços carregados com sucesso.");
+	}
+
+	public void update(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException,
+			AmadorProBusinessException {
+		if (validateForm()) {
+			EnderecoTO to = new EnderecoTO();
+			BeanUtils.copyProperties(to, this);
+			to.setId(getSelecionadoTO().getId());
+			getDelegate().update(to);
+			addMessagePagePanel("Endereço atualizado com sucesso.");
 		}
 
-		return true;
 	}
 
-	public void read() {
+	public void load(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException {
+		BeanUtils.copyProperties(this, getSelecionadoTO());
+		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
 
 	}
 
-	public boolean delete() {
-
-		return true;
+	@Override
+	public void delete(ActionEvent actionEvent) throws AmadorProBusinessException {
+		if (validateForm()) {
+			EnderecoTO to = new EnderecoTO();
+			to.setId(getSelecionadoTO().getId());
+			getDelegate().delete(to);
+			addMessagePagePanel("Endereço atualizado com sucesso.");
+		}
 	}
 
-	public List<EnderecoTO> findAll() throws AmadorProBusinessException {
-		IEnderecoDelegate delegate = new EnderecoDelegateImpl();
-
-		delegate.findAll(new EnderecoTO());
-		return delegate.findAll(new EnderecoTO());
-	}
-
+	@Override
 	public boolean validateForm() {
 
-		return true;
+		if (getSelecionadoTO() != null && getSelecionadoTO().getId() != 0) {
+			return true;
+		} else
+			return true;
+
 	}
+
+	// getters and setters
 
 	public boolean isPrincipal() {
 		return principal;
@@ -72,6 +97,14 @@ public class EnderecoBean {
 		return endereco;
 	}
 
+	public EnderecoTO getSelecionadoTO() {
+		return selecionadoTO;
+	}
+
+	public void setSelecionadoTO(EnderecoTO selecionadoTO) {
+		this.selecionadoTO = selecionadoTO;
+	}
+
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
@@ -83,7 +116,7 @@ public class EnderecoBean {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -92,12 +125,11 @@ public class EnderecoBean {
 		this.id = id;
 	}
 
-	public List<EnderecoTO> getLista() {
-		return lista;
-	}
-
-	public void setLista(List<EnderecoTO> lista) {
-		this.lista = lista;
+	private IEnderecoDelegate getDelegate() {
+		if (delegate == null) {
+			delegate = new EnderecoDelegateImpl();
+		}
+		return delegate;
 	}
 
 }

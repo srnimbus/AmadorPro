@@ -5,24 +5,26 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Amador Pro</title>
-<script src="js/jquery.js"></script>
-<script src="js/alerts.js"></script>
-<script src="js/modal.js"></script>
-<script src="js/tabs.js"></script>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Amador Pro</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/alerts.js"></script>
+	<script src="js/modal.js"></script>
+	<script src="js/tabs.js"></script>
 
-<link href="css/style.css" rel="stylesheet" />
-<style type="text/css">
+	<link href="css/style.css" rel="stylesheet" />
+	<style type="text/css">
 body {
 	padding-top: 60px;
 }
 </style>
-</head>
-<body>
-	<div>
-		<h:form>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:panel id="panel" header="Endereço">
+			<p:messages id="msgs" />
 			<div class="clearfix">
 				<label for="xlInput">Endereço</label>
 				<div class="input">
@@ -48,50 +50,56 @@ body {
 			</div>
 
 
-			<div>
-				<p:dataTable value="#{enderecoBean.lista}" var="to"
-					id="EnderecoTable">
+			<p:dataTable id="enderecoTable" value="#{enderecoBean.dataModel}"
+				var="to" selection="#{enderecoBean.selecionadoTO}" paginator="true"
+				rows="10">
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Endereco" />
-						</f:facet>
-						<h:outputText value="#{to.endereco}" />
-					</p:column>
+				<p:column selectionMode="single" style="width:18px" />
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Endereco" />
+					</f:facet>
+					<h:outputText value="#{to.endereco}" />
+				</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="CEP" />
-						</f:facet>
-						<h:outputText value="#{to.cep}" />
-					</p:column>
-					
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Principal" />
-						</f:facet>
-						<h:outputText value="#{to.principal}" />
-					</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CEP" />
+					</f:facet>
+					<h:outputText value="#{to.cep}" />
+				</p:column>
 
-				</p:dataTable>
-			</div>
-
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Principal" />
+					</f:facet>
+					<h:outputText value="#{to.principal}" />
+				</p:column>
+			</p:dataTable>
 
 			<div class="actions">
 				<h:commandButton value="Insert" type="submit" class="btn primary"
-					action="#{enderecoBean.insert}" />
+					update="panel" actionListener="#{enderecoBean.insert}" />
 				&nbsp;
 				<h:commandButton value="Find All" type="submit" class="btn primary"
-					action="#{enderecoBean.findAll}" />
+					update="panel" actionListener="#{enderecoBean.findAll}" />
 				&nbsp;
-				<button type="submit" class="btn">Cancelar</button>
+				<h:commandButton value="Load" type="submit" class="btn primary"
+					update="panel" actionListener="#{enderecoBean.load}" />
 				&nbsp;
-			</div>
+				
+				<h:commandButton value="Update" type="submit" class="btn primary"
+					update="panel" actionListener="#{enderecoBean.update}" />
+				&nbsp;
+				
+				<h:commandButton value="Delete" type="submit" class="btn primary"
+					update="panel" actionListener="#{enderecoBean.delete}" />
+				&nbsp;						
 
-		</h:form>
-	</div>
-	<footer>
+				<!--  update="panel" actionListener="#{personBean.savePerson} -->
+			</div>
+		</p:panel>
+	</h:form>
 	<p>© Amador Pro - All Lefts Deserved</p>
-	</footer>
-</body>
+</h:body>
 </html>

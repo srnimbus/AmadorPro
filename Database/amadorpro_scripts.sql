@@ -28,7 +28,7 @@ ALTER SEQUENCE public.tb_telefone_id_telefone_seq OWNED BY public.TB_TELEFONE.ID
 CREATE SEQUENCE public.tb_endereco_id_endereco_seq;
 
 CREATE TABLE public.TB_ENDERECO (
-                ID_ENDERECO VARCHAR NOT NULL DEFAULT nextval('public.tb_endereco_id_endereco_seq'),
+                ID_ENDERECO BIGINT NOT NULL DEFAULT nextval('public.tb_endereco_id_endereco_seq'),
                 PRINCIPAL BOOLEAN NOT NULL,
                 DESC_ENDERECO VARCHAR NOT NULL,
                 CEP VARCHAR NOT NULL,
@@ -41,7 +41,7 @@ ALTER SEQUENCE public.tb_endereco_id_endereco_seq OWNED BY public.TB_ENDERECO.ID
 CREATE SEQUENCE public.tb_plano_pagamento_id_plano_pagamento_seq;
 
 CREATE TABLE public.TB_PLANO_PAGAMENTO (
-                ID_PLANO_PAGAMENTO VARCHAR NOT NULL DEFAULT nextval('public.tb_plano_pagamento_id_plano_pagamento_seq'),
+                ID_PLANO_PAGAMENTO BIGINT NOT NULL DEFAULT nextval('public.tb_plano_pagamento_id_plano_pagamento_seq'),
                 DESC_PLANO VARCHAR NOT NULL,
                 VALOR_PLANO DOUBLE PRECISION NOT NULL,
                 CONSTRAINT tb_plano_pagamento_pk PRIMARY KEY (ID_PLANO_PAGAMENTO)
@@ -54,7 +54,7 @@ CREATE SEQUENCE public.tb_usuario_id_usuario_seq;
 
 CREATE TABLE public.TB_USUARIO (
                 ID_USUARIO BIGINT NOT NULL DEFAULT nextval('public.tb_usuario_id_usuario_seq'),
-                ID_PLANO_PAGAMENTO VARCHAR NOT NULL,
+                ID_PLANO_PAGAMENTO BIGINT NOT NULL,
                 NOME VARCHAR NOT NULL,
                 CPF VARCHAR NOT NULL,
                 APELIDO VARCHAR NOT NULL,
@@ -73,14 +73,14 @@ CREATE TABLE public.TB_USUARIO_TELEFONE (
 
 CREATE TABLE public.TB_USUARIO_ENDERECO (
                 ID_USUARIO BIGINT NOT NULL,
-                ID_ENDERECO VARCHAR NOT NULL
+                ID_ENDERECO BIGINT NOT NULL
 );
 
 
 CREATE SEQUENCE public.tb_pelada_id_pelada_seq;
 
 CREATE TABLE public.TB_PELADA (
-                ID_PELADA VARCHAR NOT NULL DEFAULT nextval('public.tb_pelada_id_pelada_seq'),
+                ID_PELADA BIGINT NOT NULL DEFAULT nextval('public.tb_pelada_id_pelada_seq'),
                 ID_LOCAL_PELADA BIGINT NOT NULL,
                 DESC_PELADA VARCHAR NOT NULL,
                 DATA DATE NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE public.TB_PELADA (
 ALTER SEQUENCE public.tb_pelada_id_pelada_seq OWNED BY public.TB_PELADA.ID_PELADA;
 
 CREATE TABLE public.TB_PELADA_USUARIO (
-                ID_PELADA VARCHAR NOT NULL,
+                ID_PELADA BIGINT NOT NULL,
                 ID_USUARIO BIGINT NOT NULL,
                 DONO_PELADA BOOLEAN NOT NULL
 );

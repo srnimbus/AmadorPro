@@ -16,9 +16,11 @@ import br.com.srnimbus.amadorpro.to.EnderecoTO;
 
 public class EnderecoDelegateImpl implements IEnderecoDelegate {
 
+	private IEnderecoDAO dao;
+
 	@Override
 	public boolean insert(EnderecoTO to) throws AmadorProBusinessException {
-		IEnderecoDAO dao = new EnderecoDAOImpl();
+
 		Endereco modelo = new Endereco();
 
 		try {
@@ -32,7 +34,7 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 		}
 
 		try {
-			dao.insert(modelo);
+			getDAO().insert(modelo);
 		} catch (AmadorProDAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,19 +45,50 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 	@Override
 	public EnderecoTO read(EnderecoTO to) throws AmadorProBusinessException {
 		EnderecoTO retorno = new EnderecoTO();
-
 		return retorno;
 	}
 
 	@Override
 	public boolean delete(EnderecoTO to) throws AmadorProBusinessException {
-		// TODO Auto-generated method stub
-		return false;
+		Endereco modelo = new Endereco();
+		try {
+			BeanUtils.copyProperties(modelo, to);
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			getDAO().delete(modelo);
+		} catch (AmadorProDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@Override
 	public EnderecoTO update(EnderecoTO to) throws AmadorProBusinessException {
-		// TODO Auto-generated method stub
+		Endereco modelo = new Endereco();
+		try {
+			BeanUtils.copyProperties(modelo, to);
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			getDAO().update(modelo);
+		} catch (AmadorProDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -72,11 +105,10 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 			e1.printStackTrace();
 		}
 
-		IEnderecoDAO dao = new EnderecoDAOImpl();
 		List<EnderecoTO> lista = new ArrayList<EnderecoTO>();
 
 		try {
-			for (Object object : dao.findAll(modelo)) {
+			for (Object object : getDAO().findAll(modelo)) {
 				EnderecoTO tos = new EnderecoTO();
 				BeanUtils.copyProperties(tos, object);
 				lista.add(tos);
@@ -93,5 +125,12 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 		}
 
 		return lista;
+	}
+
+	public IEnderecoDAO getDAO() {
+		if (dao == null) {
+			dao = new EnderecoDAOImpl();
+		}
+		return dao;
 	}
 }
