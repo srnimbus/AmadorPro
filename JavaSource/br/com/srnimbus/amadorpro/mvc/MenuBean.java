@@ -43,4 +43,7 @@ public class MenuBean {
 	public MenuModel getModel() {
 		return model;
 	}
+	
+	
+	
 }
