@@ -1,19 +1,23 @@
 package test.classes;
 
-import java.util.TimeZone;
+import br.com.srnimbus.amadorpro.dominio.Telefone;
+import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
+import br.com.srnimbus.amadorpro.util.HibernateUtil;
 
 //Classe de teste para mapeamento e conexao Hibernate
 public class TesteHibernate {
 
-	public static void main(String[] args) {
-		// for (int j = 0; j <= 100; j++) {
+	public static void main(String[] args) throws AmadorProDAOException {
+		for (int j = 0; j <= 100; j++) {
 
-		// Telefone telefone = new Telefone();
-		// telefone.setId(208);
-		// telefone.setPrincipal(false);
-		// telefone.setTelefone("12345678");
+			Telefone telefone = new Telefone();
+			// telefone.setId(208);
+			telefone.setPrincipal(false);
+			telefone.setTelefone("12345678");
 
-		// HibernateUtil.insert(telefone);
+			HibernateUtil.insert(telefone);
+
+		}
 		// HibernateUtil.update(telefone);
 		// HibernateUtil.delete(telefone);
 
@@ -33,7 +37,7 @@ public class TesteHibernate {
 		// Telefone tel = (Telefone) HibernateUtil.load(Telefone.class, 210);
 		// System.out.println(tel.getTelefone());
 
-		System.out.println(TimeZone.getDefault());
+		// System.out.println(TimeZone.getDefault());
 
 	}
 }

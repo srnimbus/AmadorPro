@@ -4,16 +4,7 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
-   <property key="Logical" value="AmadorPro" />
-   <property key="Connection Type" value="PostgreSQL" />
-   <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/amadorpro" />
-   <property key="UID" value="amadorpro" />
-   <property key="PWD" value="123456" />
-   <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
-   <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
-   <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
-   <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
-   <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
+   <property key="Logical" value="Modelo de Dados" />
   </data-source>
   <data-source id="DS2">
    <property key="Connection Type" value="PostgreSQL" />
@@ -39,9 +30,9 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
-  <data-source id="DS0">
+  <data-source id="DS2">
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="Logical" value="AmadorPro" />
+   <property key="Logical" value="Modelo de Dados" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/amadorpro" />
    <property key="UID" value="amadorpro" />
    <property key="PWD" value="123456" />
@@ -73,7 +64,7 @@
    <relationships>
    </relationships>
   </database>
-  <database id="DB8" populated="true" UUID="7e9b0dba-8228-4b7c-a5e5-287fa54bb756" dbcs-ref="DS0" name="AmadorPro" physicalName="AmadorPro" >
+  <database id="DB8" populated="true" UUID="7e9b0dba-8228-4b7c-a5e5-287fa54bb756" dbcs-ref="DS2" name="Modelo de Dados" physicalName="AmadorPro" >
    <catalog id="CAT9" populated="true" UUID="05e4feff-993c-4168-9db4-dfb215a8f5d6" name="amadorpro" nativeTerm="database" physicalName="amadorpro" >
     <schema id="SCH10" populated="false" UUID="4e374c04-36cb-411c-bd0d-30b24e7e4425" name="information_schema" nativeTerm="schema" physicalName="information_schema" >
     </schema>
@@ -418,7 +409,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <compare-dm-settings  outputFormatAsString="ENGLISH"  saveFlag="true" >
   <source-stuff   datastoreTypeAsString="PROJECT"   filePath=""  />

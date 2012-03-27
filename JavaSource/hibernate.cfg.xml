@@ -13,7 +13,7 @@
         <property name="connection.pool_size">1</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         -->
-        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/AmadorProDS</property>
+        <property name="hibernate.connection.datasource">java:/amadorProDS</property>
         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
         <property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>

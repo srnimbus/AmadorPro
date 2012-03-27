@@ -14,10 +14,10 @@ public class DataSourceTest {
 		testDataSource();
 	}
 
-	private static void testDataSource() throws NamingException, SQLException {
+	public static void testDataSource() throws NamingException, SQLException {
 		final String sql = "select 1";
 		InitialContext ic = new InitialContext();
-		DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/AmadorProDS");
+		DataSource ds = (DataSource) ic.lookup("java:/amadorProDS");
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
