@@ -23,21 +23,13 @@ body {
 
 <h:body>
 	<h:form id="form">
-		<p:panel id="panel" header="Endereço">
+		<p:panel id="panel" header="Telefone">
 			<p:messages id="msgs" />
 			<div class="clearfix">
-				<label for="xlInput">Endereço</label>
+				<label for="xlInput">Telefone</label>
 				<div class="input">
-					<h:inputText id="endereco" name="endereco"
-						value="#{enderecoBean.endereco}" size="30" styleClass="xlarge" />
-				</div>
-			</div>
-
-			<div class="clearfix">
-				<label for="xlInput">CEP</label>
-				<div class="input">
-					<h:inputText id="cep" name="cep" value="#{enderecoBean.cep}"
-						size="30" styleClass="xlarge" />
+					<h:inputText id="telefone" name="telefone"
+						value="#{telefoneBean.telefone}" size="30" styleClass="xlarge" />
 				</div>
 			</div>
 
@@ -45,28 +37,21 @@ body {
 				<label for="xlInput">Principal</label>
 				<div class="input">
 					<h:selectBooleanCheckbox id="principal" name="principal"
-						value="#{enderecoBean.principal}" />
+						value="#{telefoneBean.principal}" />
 				</div>
 			</div>
 
 
-			<p:dataTable id="enderecoTable" value="#{enderecoBean.dataModel}"
-				var="to" selection="#{enderecoBean.selecionadoTO}" paginator="true"
+			<p:dataTable id="telefoneTable" value="#{telefoneBean.dataModel}"
+				var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
 				rows="10">
 
 				<p:column selectionMode="single" style="width:18px" />
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Endereco" />
+						<h:outputText value="Telefone" />
 					</f:facet>
-					<h:outputText value="#{to.endereco}" />
-				</p:column>
-
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="CEP" />
-					</f:facet>
-					<h:outputText value="#{to.cep}" />
+					<h:outputText value="#{to.telefone}" />
 				</p:column>
 
 				<p:column>
@@ -79,24 +64,23 @@ body {
 
 			<div class="actions">
 				<h:commandButton value="Insert" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.insert}" />
+					update="panel" actionListener="#{telefoneBean.insert}" />
 				&nbsp;
 				<h:commandButton value="Find All" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.findAll}" />
+					update="panel" actionListener="#{telefoneBean.findAll}" />
 				&nbsp;
 				<h:commandButton value="Load" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.load}" />
+					update="panel" actionListener="#{telefoneBean.load}" />
 				&nbsp;
 				
 				<h:commandButton value="Update" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.update}" />
+					update="panel" actionListener="#{telefoneBean.update}" />
 				&nbsp;
 				
 				<h:commandButton value="Delete" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.delete}" />
+					update="panel" actionListener="#{telefoneBean.delete}" />
 				&nbsp;						
 
-				<!--  update="panel" actionListener="#{personBean.savePerson} -->
 			</div>
 		</p:panel>
 	</h:form>

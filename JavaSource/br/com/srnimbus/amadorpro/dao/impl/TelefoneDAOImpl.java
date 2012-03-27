@@ -1,5 +1,7 @@
 package br.com.srnimbus.amadorpro.dao.impl;
 
+import java.util.List;
+
 import br.com.srnimbus.amadorpro.dao.ITelefoneDAO;
 import br.com.srnimbus.amadorpro.dominio.Telefone;
 import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
@@ -32,9 +34,8 @@ public class TelefoneDAOImpl implements ITelefoneDAO {
 	}
 
 	@Override
-	public Telefone findAll(Telefone telefone) throws AmadorProDAOException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Object> findAll(Telefone telefone) throws AmadorProDAOException {
+		return HibernateUtil.findAll(Telefone.class.getName());
 	}
 
 }
