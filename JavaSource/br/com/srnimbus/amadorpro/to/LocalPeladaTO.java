@@ -1,21 +1,12 @@
 package br.com.srnimbus.amadorpro.to;
 
 
-public class LocalPeladaTO {
+public class LocalPeladaTO extends AbstractTO {
 
-	private int id;
 	private String local;
 	private String endereco;
 	private String email;
 	private String telefone;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getLocal() {
 		return local;

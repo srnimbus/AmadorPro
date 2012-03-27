@@ -1,5 +1,7 @@
 package br.com.srnimbus.amadorpro.dao.impl;
 
+import java.util.List;
+
 import br.com.srnimbus.amadorpro.dao.ILocalPeladaDAO;
 import br.com.srnimbus.amadorpro.dominio.LocalPelada;
 import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
@@ -32,9 +34,8 @@ public class LocalPeladaDAOImpl implements ILocalPeladaDAO {
 	}
 
 	@Override
-	public LocalPelada findAll(LocalPelada localPelada) throws AmadorProDAOException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Object>  findAll(LocalPelada localPelada) throws AmadorProDAOException {
+		return HibernateUtil.findAll(LocalPelada.class.getName());
 	}
 
 }
