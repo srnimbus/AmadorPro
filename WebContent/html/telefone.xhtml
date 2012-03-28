@@ -44,9 +44,10 @@ body {
 
 			<p:dataTable id="telefoneTable" value="#{telefoneBean.dataModel}"
 				var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
-				rows="10">
+				rows="10" selectionMode="single">
 
-				<p:column selectionMode="single" style="width:18px" />
+				<p:ajax event="rowSelect" listener="#{telefoneBean.load}" update=":form:panel"/>
+				
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Telefone" />
@@ -69,10 +70,6 @@ body {
 				<h:commandButton value="Find All" type="submit" class="btn primary"
 					update="panel" actionListener="#{telefoneBean.findAll}" />
 				&nbsp;
-				<h:commandButton value="Load" type="submit" class="btn primary"
-					update="panel" actionListener="#{telefoneBean.load}" />
-				&nbsp;
-				
 				<h:commandButton value="Update" type="submit" class="btn primary"
 					update="panel" actionListener="#{telefoneBean.update}" />
 				&nbsp;

@@ -51,10 +51,11 @@ body {
 
 
 			<p:dataTable id="enderecoTable" value="#{enderecoBean.dataModel}"
-				var="to" selection="#{enderecoBean.selecionadoTO}" paginator="true"
-				rows="10">
+				var="to" selection="#{enderecoBean.selecionadoTO}"  paginator="true"
+				rows="10" selectionMode="single">
+				<p:ajax event="rowSelect" listener="#{enderecoBean.load}" update=":form:panel"/>     
 
-				<p:column selectionMode="single" style="width:18px" />
+				<!--  <p:column selectionMode="single" style="width:18px" /> -->
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Endereco" />
@@ -84,10 +85,6 @@ body {
 				<h:commandButton value="Find All" type="submit" class="btn primary"
 					update="panel" actionListener="#{enderecoBean.findAll}" />
 				&nbsp;
-				<h:commandButton value="Load" type="submit" class="btn primary"
-					update="panel" actionListener="#{enderecoBean.load}" />
-				&nbsp;
-				
 				<h:commandButton value="Update" type="submit" class="btn primary"
 					update="panel" actionListener="#{enderecoBean.update}" />
 				&nbsp;

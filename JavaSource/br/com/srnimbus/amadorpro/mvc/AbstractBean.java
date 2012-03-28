@@ -36,6 +36,8 @@ public abstract class AbstractBean {
 	protected void addMessagePagePanel(String msg) {
 		FacesContext.getCurrentInstance().addMessage(FacesMessage.FACES_MESSAGES, new FacesMessage(msg));
 	}
+	
+	
 
 	public AbstractDataModel getDataModel() {
 		return dataModel;

@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.primefaces.event.SelectEvent;
 
 import br.com.srnimbus.amadorpro.business.ILocalPeladaDelegate;
 import br.com.srnimbus.amadorpro.business.impl.LocalPeladaDelegateImpl;
@@ -66,6 +67,12 @@ public class LocalPeladaBean extends AbstractBean {
 		List listaTO = getDelegate().findAll(new LocalPeladaTO());
 		setDataModel(listaTO);
 		addMessagePagePanel("Todos os locais de pelada foram carregados com sucesso.");
+	}
+	
+	//<p:ajax event="rowSelect" listener="#{enderecoBean.load}" update=":form:panel"/>   
+	public void load(SelectEvent selectEvent) throws IllegalAccessException, InvocationTargetException {
+		BeanUtils.copyProperties(this, getSelecionadoTO());
+		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
 	}
 
 	@Override

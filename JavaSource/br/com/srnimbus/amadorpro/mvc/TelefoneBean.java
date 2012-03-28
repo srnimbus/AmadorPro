@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.primefaces.event.SelectEvent;
 
 import br.com.srnimbus.amadorpro.business.ITelefoneDelegate;
 import br.com.srnimbus.amadorpro.business.impl.TelefoneDelegateImpl;
@@ -33,49 +34,53 @@ public class TelefoneBean extends AbstractBean {
 	}
 
 	@Override
-	public void insert(ActionEvent actionEvent) throws IllegalAccessException,
-			InvocationTargetException, AmadorProBusinessException {
-			TelefoneTO to = new TelefoneTO();
-			BeanUtils.copyProperties(to, this);
-			getDelegate().insert(to);
-			addMessagePagePanel("Telefone inserido com sucesso.");
-
-	}
-
-	@Override
-	public void update(ActionEvent actionEvent) throws IllegalAccessException,InvocationTargetException,
-	AmadorProBusinessException {
-	if (validateForm()) {
+	public void insert(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException,
+			AmadorProBusinessException {
 		TelefoneTO to = new TelefoneTO();
 		BeanUtils.copyProperties(to, this);
-		to.setId(getSelecionadoTO().getId());
-		getDelegate().update(to);
-		addMessagePagePanel("Telefone atualizado com sucesso.");
+		getDelegate().insert(to);
+		addMessagePagePanel("Telefone inserido com sucesso.");
+
 	}
-}
 
 	@Override
-	public void delete(ActionEvent actionEvent) throws IllegalAccessException,
-			InvocationTargetException, AmadorProBusinessException {
+	public void update(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException,
+			AmadorProBusinessException {
+		if (validateForm()) {
+			TelefoneTO to = new TelefoneTO();
+			BeanUtils.copyProperties(to, this);
+			to.setId(getSelecionadoTO().getId());
+			getDelegate().update(to);
+			addMessagePagePanel("Telefone atualizado com sucesso.");
+		}
+	}
+
+	@Override
+	public void delete(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException,
+			AmadorProBusinessException {
 		if (validateForm()) {
 			TelefoneTO to = new TelefoneTO();
 			to.setId(getSelecionadoTO().getId());
 			getDelegate().delete(to);
 			addMessagePagePanel("Telefone atualizado com sucesso.");
 		}
-
 	}
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void findAll(ActionEvent actionEvent)
-			throws AmadorProBusinessException {
+	public void findAll(ActionEvent actionEvent) throws AmadorProBusinessException {
 		List listaTO = getDelegate().findAll(new TelefoneTO());
 		setDataModel(listaTO);
 		addMessagePagePanel("Todos os telefones foram carregados com sucesso.");
 
 	}
 
+	//<p:ajax event="rowSelect" listener="#{enderecoBean.load}" update=":form:panel"/>   
+	public void load(SelectEvent selectEvent) throws IllegalAccessException, InvocationTargetException {
+		BeanUtils.copyProperties(this, getSelecionadoTO());
+		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
+	}
+	
 	@Override
 	public boolean validateForm() {
 		// TODO Auto-generated method stub

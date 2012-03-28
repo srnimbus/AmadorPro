@@ -1,6 +1,7 @@
 package br.com.srnimbus.amadorpro.mvc;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,10 +9,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.primefaces.event.SelectEvent;
 
 import br.com.srnimbus.amadorpro.business.IEnderecoDelegate;
 import br.com.srnimbus.amadorpro.business.impl.EnderecoDelegateImpl;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
+import br.com.srnimbus.amadorpro.to.AbstractTO;
 import br.com.srnimbus.amadorpro.to.EnderecoTO;
 
 @ManagedBean(name = "enderecoBean")
@@ -40,7 +43,18 @@ public class EnderecoBean extends AbstractBean {
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void findAll(ActionEvent actionEvent) throws AmadorProBusinessException {
-		List listaTO = getDelegate().findAll(new EnderecoTO());
+		// List listaTO = getDelegate().findAll(new EnderecoTO());
+
+		List listaTO = new ArrayList<AbstractTO>();
+		EnderecoTO to = new EnderecoTO();
+		to.setId(1);
+		to.setEndereco("END1");
+		listaTO.add(to);
+		EnderecoTO to2 = new EnderecoTO();
+		to2.setId(2);
+		to2.setEndereco("END2");
+		listaTO.add(to2);
+
 		setDataModel(listaTO);
 		addMessagePagePanel("Todos os endereços carregados com sucesso.");
 	}
@@ -57,10 +71,10 @@ public class EnderecoBean extends AbstractBean {
 
 	}
 
-	public void load(ActionEvent actionEvent) throws IllegalAccessException, InvocationTargetException {
+	//<p:ajax event="rowSelect" listener="#{enderecoBean.load}" update=":form:panel"/>   
+	public void load(SelectEvent selectEvent) throws IllegalAccessException, InvocationTargetException {
 		BeanUtils.copyProperties(this, getSelecionadoTO());
 		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
-
 	}
 
 	@Override

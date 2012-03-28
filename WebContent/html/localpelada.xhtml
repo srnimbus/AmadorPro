@@ -61,9 +61,8 @@ body {
 
 			<p:dataTable id="localPeladaTable" value="#{localPeladaBean.dataModel}"
 				var="to" selection="#{localPeladaBean.selecionadoTO}" paginator="true"
-				rows="10">
-
-				<p:column selectionMode="single" style="width:18px" />
+				rows="10" selectionMode="single">
+				<p:ajax event="rowSelect" listener="#{localPeladaBean.load}" update=":form:panel"/>   
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Local" />
@@ -100,14 +99,9 @@ body {
 				<h:commandButton value="Find All" type="submit" class="btn primary"
 					update="panel" actionListener="#{localPeladaBean.findAll}" />
 				&nbsp;
-				<h:commandButton value="Load" type="submit" class="btn primary"
-					update="panel" actionListener="#{localPeladaBean.load}" />
-				&nbsp;
-				
 				<h:commandButton value="Update" type="submit" class="btn primary"
 					update="panel" actionListener="#{localPeladaBean.update}" />
 				&nbsp;
-				
 				<h:commandButton value="Delete" type="submit" class="btn primary"
 					update="panel" actionListener="#{localPeladaBean.delete}" />
 				&nbsp;						
