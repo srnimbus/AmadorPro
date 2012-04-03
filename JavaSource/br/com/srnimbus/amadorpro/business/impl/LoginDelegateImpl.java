@@ -10,39 +10,27 @@ import br.com.srnimbus.amadorpro.dao.impl.LoginDAOImpl;
 import br.com.srnimbus.amadorpro.dominio.Login;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
-import br.com.srnimbus.amadorpro.mvc.LoginBean;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
 public class LoginDelegateImpl implements ILoginDelegate {
 
-	public boolean isSenhaValida(LoginBean loginBean) throws AmadorProException {
+	public boolean isSenhaValida(LoginTO to) throws AmadorProException {
 
-		boolean retorno = true;
 		ILoginDAO loginDAO = new LoginDAOImpl();
-
+		Login model = new Login();
 		// copia dos objetos
 		try {
-			BeanUtils.copyProperties(loginDAO, loginBean);
+			BeanUtils.copyProperties(model, to);
+			String hashSenha = loginDAO.getHashSenha(model);
+			return hashSenha.equals(to.getSenha());
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
-		Login loginDominio = new Login();
-
-		loginDominio.setLogin(loginBean.getLogin());
-		// loginDominio.setSenha(loginBean.getSenha());
-
-		String hashSenha = loginDAO.getHashSenha(loginDominio);
-
-		if (!loginDominio.getSenha().equals(hashSenha)) {
-			throw new AmadorProException("Fudeu");
-		}
-
-		return retorno;
-
-		// loginDAO.update(login);
+		return false;
+		
 	}
 
 	@Override

@@ -2,8 +2,10 @@ package br.com.srnimbus.amadorpro.mvc;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -37,8 +39,18 @@ public class LoginBean {
 	public String login() throws IllegalAccessException, InvocationTargetException {
 		LoginTO to = new LoginTO();
 		BeanUtils.copyProperties(to, this);
-		return JAASHelper.login(to) ? Constants.SUCCESS : Constants.ERROR;
 
+		boolean isLogged = JAASHelper.login(to);
+
+		if (!isLogged) {
+			addMessagePagePanel("Username e/ou Senha Invalidos");
+		}
+
+		return isLogged ? Constants.SUCCESS : Constants.ERROR;
+	}
+
+	protected void addMessagePagePanel(String msg) {
+		FacesContext.getCurrentInstance().addMessage(FacesMessage.FACES_MESSAGES, new FacesMessage(msg));
 	}
 
 }

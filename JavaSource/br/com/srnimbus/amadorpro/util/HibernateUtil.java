@@ -25,7 +25,7 @@ public class HibernateUtil {
 
 	static {
 		try {
-			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory(); 
+			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
 			// documentacao desatualizada
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
@@ -35,6 +35,10 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
+	}
+
+	public static Session getOpenSession() {
+		return HibernateUtil.getSessionFactory().openSession();
 	}
 
 	public static void insert(Object objetoHibernate) throws AmadorProDAOException {
@@ -93,8 +97,8 @@ public class HibernateUtil {
 		}
 		return objects;
 	}
-	
-	private static void testDataSource() throws NamingException, SQLException {
+
+	public static void testDataSource() throws NamingException, SQLException {
 		final String sql = "select 1";
 		InitialContext ic = new InitialContext();
 		DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/AmadorProDS");

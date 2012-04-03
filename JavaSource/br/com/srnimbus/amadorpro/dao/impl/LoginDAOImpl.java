@@ -1,5 +1,10 @@
 package br.com.srnimbus.amadorpro.dao.impl;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import br.com.srnimbus.amadorpro.dao.ILoginDAO;
 import br.com.srnimbus.amadorpro.dominio.Login;
 import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
@@ -27,12 +32,21 @@ public class LoginDAOImpl implements ILoginDAO {
 
 	public String getHashSenha(Login login) throws AmadorProDAOException {
 
-		// ajustar no banco para o login ser chave composta
-		// Login retorno = (Login) HibernateUtil.load(Login.class,
-		// login.getLogin());
+		Login retorno;
+		Session sessao = HibernateUtil.getOpenSession();
+		try {
+			Transaction transacao = sessao.beginTransaction();
+			Query query = sessao.createQuery("from Login where login = :login");
+			query.setParameter("login", login.getLogin());
+			retorno = (Login)query.uniqueResult();
+			transacao.commit();
+		} catch (HibernateException e) {
+			throw new AmadorProDAOException(e);
+		} finally {
+			sessao.close();
+		}
 
-		return "";
-
+		return retorno.getSenha();
 	}
 
 }

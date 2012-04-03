@@ -14,10 +14,16 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import br.com.srnimbus.amadorpro.business.ILoginDelegate;
+import br.com.srnimbus.amadorpro.business.impl.LoginDelegateImpl;
+import br.com.srnimbus.amadorpro.exception.AmadorProException;
+import br.com.srnimbus.amadorpro.to.LoginTO;
+
 public class AmadorProLoginModule implements LoginModule {
 
 	private Subject subject;
 	private CallbackHandler callbackHandler;
+	LoginTO loginTO;
 	private Map sharedState = Collections.<String, Object> emptyMap();
 	private Map options = Collections.<String, Object> emptyMap();
 
@@ -61,8 +67,6 @@ public class AmadorProLoginModule implements LoginModule {
 	 */
 
 	private boolean authenticated;
-	private String username;
-	private String password;
 
 	@Override
 	public boolean login() throws LoginException {
@@ -82,20 +86,17 @@ public class AmadorProLoginModule implements LoginModule {
 			throw ex;
 		}
 
-		// Authenticate username/password
-		username = nameCB.getName();
-		password = String.valueOf(passwordCB.getPassword());
-
-		//
-		// TODO Aqui eu vou na base de dados e digo se a autenticacao funcionou
-		//
-
-		if (username.equals("user") && password.equals("pass")) {
-			authenticated = true;
-		} else {
-			authenticated = false;
+		ILoginDelegate delegate = new LoginDelegateImpl();
+		loginTO = new LoginTO();
+		loginTO.setLogin(nameCB.getName());
+		loginTO.setSenha(String.valueOf(passwordCB.getPassword()));
+		
+		try {
+			authenticated = delegate.isSenhaValida(loginTO);
+		} catch (AmadorProException e) {
+			e.printStackTrace();
 		}
-
+		
 		return authenticated;
 	}
 
@@ -146,8 +147,7 @@ public class AmadorProLoginModule implements LoginModule {
 
 	@Override
 	public boolean abort() throws LoginException {
-		username = null;
-		password = null;
+		loginTO = null;
 		authenticated = false;
 		return false;
 	}

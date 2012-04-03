@@ -11,6 +11,6 @@ public interface ILoginDAO {
 	
 	public void delete(Login login) throws AmadorProDAOException;
 	
-	public String getHashSenha(Login login) throws AmadorProDAOException;;
+	public String getHashSenha(Login login) throws AmadorProDAOException;
 }
 
