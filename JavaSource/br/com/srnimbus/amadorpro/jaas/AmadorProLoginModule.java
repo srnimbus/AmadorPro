@@ -111,7 +111,7 @@ public class AmadorProLoginModule implements LoginModule {
 	 * 
 	 */
 
-	private Set principalsAdded;
+	private Set<?> principalsAdded;
 
 	@Override
 	public boolean commit() throws LoginException {

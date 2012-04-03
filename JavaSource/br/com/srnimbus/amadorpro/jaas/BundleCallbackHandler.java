@@ -13,7 +13,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 public class BundleCallbackHandler implements CallbackHandler {
 
 	private static final char[] EMPTY_CHARS = new char[0];
-	private Map callbackValues = new HashMap();
+	private Map<Class<?>, String> callbackValues = new HashMap<Class<?>, String>();
 
 	public BundleCallbackHandler() {
 	}
