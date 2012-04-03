@@ -8,9 +8,14 @@
 		<param-value>Development</param-value>
 	</context-param>
 	<servlet>
+		<servlet-name>JAASConfiguration</servlet-name>
+		<servlet-class>br.com.srnimbus.amadorpro.jaas.JAASStartupServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
