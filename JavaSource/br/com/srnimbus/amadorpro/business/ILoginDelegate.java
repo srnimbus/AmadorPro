@@ -18,4 +18,6 @@ public interface ILoginDelegate {
 	
 	public boolean isSenhaValida(LoginTO to) throws AmadorProException;
 	
+	public LoginTO getLoginTO();
+	
 }

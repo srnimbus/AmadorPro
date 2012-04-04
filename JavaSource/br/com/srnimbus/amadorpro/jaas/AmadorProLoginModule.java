@@ -2,6 +2,7 @@ package br.com.srnimbus.amadorpro.jaas;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,16 +15,21 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import br.com.srnimbus.amadorpro.business.ILogLoginDelegate;
 import br.com.srnimbus.amadorpro.business.ILoginDelegate;
+import br.com.srnimbus.amadorpro.business.impl.LogLoginDelegateImpl;
 import br.com.srnimbus.amadorpro.business.impl.LoginDelegateImpl;
+import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
+import br.com.srnimbus.amadorpro.to.LogLoginTO;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
 public class AmadorProLoginModule implements LoginModule {
 
 	private Subject subject;
 	private CallbackHandler callbackHandler;
-	LoginTO loginTO;
+	private LoginTO loginTO;
+	private LogLoginTO logLoginTO;
 	private Map sharedState = Collections.<String, Object> emptyMap();
 	private Map options = Collections.<String, Object> emptyMap();
 
@@ -86,18 +92,36 @@ public class AmadorProLoginModule implements LoginModule {
 			throw ex;
 		}
 
-		ILoginDelegate delegate = new LoginDelegateImpl();
+		ILoginDelegate loginDelegate = new LoginDelegateImpl();
 		loginTO = new LoginTO();
 		loginTO.setLogin(nameCB.getName());
 		loginTO.setSenha(String.valueOf(passwordCB.getPassword()));
-		
+
 		try {
-			authenticated = delegate.isSenhaValida(loginTO);
+			authenticated = loginDelegate.isSenhaValida(loginTO);
+			insertLogLogin(loginDelegate.getLoginTO().getId());
 		} catch (AmadorProException e) {
 			e.printStackTrace();
 		}
-		
+
 		return authenticated;
+	}
+
+	private void insertLogLogin(int idLogin) {
+		ILogLoginDelegate delegate = new LogLoginDelegateImpl();
+		LogLoginTO to = new LogLoginTO();
+
+		to.setIdLogin(idLogin);
+		to.setInfo(JAASHelper.collectDataLogLogin());
+		to.setDataHoraLogin(new Date());
+
+		try {
+			delegate.insert(to);
+		} catch (AmadorProBusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -116,8 +140,8 @@ public class AmadorProLoginModule implements LoginModule {
 
 	@Override
 	public boolean commit() throws LoginException {
-		//remover os principals.
-		
+		// remover os principals.
+
 		if (!authenticated) {
 			// LOGGER.logp(Level.FINEST, CLASS_NAME, "commit()",
 			// "{0} not authenticated.", getUsername());

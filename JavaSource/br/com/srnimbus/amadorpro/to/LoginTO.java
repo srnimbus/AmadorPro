@@ -1,10 +1,9 @@
 package br.com.srnimbus.amadorpro.to;
 
-
 public class LoginTO {
 
 	private int id;
-	private UsuarioTO usuario; //MUDAR PARA O TO
+	private UsuarioTO usuarioTO; // MUDAR PARA O TO
 	private String login;
 	private String senha;
 
@@ -17,11 +16,11 @@ public class LoginTO {
 	}
 
 	public UsuarioTO getUsuario() {
-		return usuario;
+		return usuarioTO;
 	}
 
-	public void setUsuario(UsuarioTO usuario) {
-		this.usuario = usuario;
+	public void setUsuarioTO(UsuarioTO usuarioTO) {
+		this.usuarioTO = usuarioTO;
 	}
 
 	public String getLogin() {

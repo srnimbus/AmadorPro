@@ -28,5 +28,6 @@
         <mapping class="br.com.srnimbus.amadorpro.dominio.PlanoPagamento" />
         <mapping class="br.com.srnimbus.amadorpro.dominio.Telefone" />
         <mapping class="br.com.srnimbus.amadorpro.dominio.Usuario" />
+        <mapping class="br.com.srnimbus.amadorpro.dominio.LogLogin" />
     </session-factory>
 </hibernate-configuration>

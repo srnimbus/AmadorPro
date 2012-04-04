@@ -11,8 +11,12 @@ import br.com.srnimbus.amadorpro.dominio.Login;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.to.PlanoPagamentoTO;
+import br.com.srnimbus.amadorpro.to.UsuarioTO;
 
 public class LoginDelegateImpl implements ILoginDelegate {
+
+	private LoginTO loginTO;
 
 	public boolean isSenhaValida(LoginTO to) throws AmadorProException {
 
@@ -21,8 +25,10 @@ public class LoginDelegateImpl implements ILoginDelegate {
 		// copia dos objetos
 		try {
 			BeanUtils.copyProperties(model, to);
-			String hashSenha = loginDAO.getHashSenha(model);
-			return hashSenha.equals(to.getSenha());
+			Login login = loginDAO.getLogin(model);
+			if (login != null)
+				setLoginTO(login);
+			return login.getSenha().equals(to.getSenha());
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
@@ -30,7 +36,30 @@ public class LoginDelegateImpl implements ILoginDelegate {
 		}
 
 		return false;
-		
+
+	}
+
+	private void setLoginTO(Login login) {
+		loginTO = new LoginTO();
+		UsuarioTO usuarioTO = new UsuarioTO();
+		PlanoPagamentoTO planoPagamentoTO = new PlanoPagamentoTO();
+		try {
+			BeanUtils.copyProperties(loginTO, login);
+			BeanUtils.copyProperties(usuarioTO, login.getUsuario());
+			BeanUtils.copyProperties(planoPagamentoTO, login.getUsuario().getPlanoPagamento());
+			usuarioTO.setPlanoPagamentoTO(planoPagamentoTO);
+			loginTO.setUsuarioTO(usuarioTO);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public LoginTO getLoginTO() {
+		return this.loginTO;
 	}
 
 	@Override

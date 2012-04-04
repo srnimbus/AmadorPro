@@ -4,7 +4,7 @@ package br.com.srnimbus.amadorpro.to;
 public class UsuarioTO {
 
 	private int id;
-	private PlanoPagamentoTO planoPagamento; //MUDAR PARA O TO
+	private PlanoPagamentoTO planoPagamentoTO; //MUDAR PARA O TO
 	private String nome;
 	private String cpf;
 	private String apelido;
@@ -18,12 +18,12 @@ public class UsuarioTO {
 		this.id = id;
 	}
 
-	public PlanoPagamentoTO getPlanoPagamento() {
-		return planoPagamento;
+	public PlanoPagamentoTO getPlanoPagamentoTO() {
+		return planoPagamentoTO;
 	}
 
-	public void setPlanoPagamento(PlanoPagamentoTO planoPagamento) {
-		this.planoPagamento = planoPagamento;
+	public void setPlanoPagamentoTO(PlanoPagamentoTO planoPagamentoTO) {
+		this.planoPagamentoTO = planoPagamentoTO;
 	}
 
 	public String getNome() {

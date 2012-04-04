@@ -30,7 +30,7 @@ public class LoginDAOImpl implements ILoginDAO {
 
 	}
 
-	public String getHashSenha(Login login) throws AmadorProDAOException {
+	public Login getLogin(Login login) throws AmadorProDAOException {
 
 		Login retorno;
 		Session sessao = HibernateUtil.getOpenSession();
@@ -46,7 +46,7 @@ public class LoginDAOImpl implements ILoginDAO {
 			sessao.close();
 		}
 
-		return retorno.getSenha();
+		return retorno;
 	}
 
 }
