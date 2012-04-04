@@ -55,7 +55,7 @@ public class Pelada {
 	public void setLocal(LocalPelada local) {
 		this.local = local;
 	}
-
+	
 	@Column(name = "DESC_PELADA")
 	public String getDescricao() {
 		return descricao;

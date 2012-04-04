@@ -1,5 +1,7 @@
 package br.com.srnimbus.amadorpro.dominio;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,6 +29,9 @@ public class Usuario {
 
 	private int id;
 	private PlanoPagamento planoPagamento;
+	private Set<Telefone> telefones;
+	private Set<Pelada> peladas;
+	private Set<Endereco> enderecos;
 	private String nome;
 	private String cpf;
 	private String apelido;
@@ -43,13 +50,43 @@ public class Usuario {
 
 	// @Column(name = "ID_PLANO_PAGAMENTO")
 	@JoinColumn(name = "ID_PLANO_PAGAMENTO", referencedColumnName = "ID_PLANO_PAGAMENTO", insertable = false, updatable = false)
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	public PlanoPagamento getPlanoPagamento() {
 		return planoPagamento;
 	}
 
 	public void setPlanoPagamento(PlanoPagamento planoPagamento) {
 		this.planoPagamento = planoPagamento;
+	}
+
+	@JoinTable(name = "TB_USUARIO_TELEFONE", joinColumns = { @JoinColumn(name = "ID_USUARIO", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_TELEFONE") })
+	@ManyToMany(fetch = FetchType.EAGER)
+	public Set<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	@JoinTable(name = "TB_PELADA_USUARIO", joinColumns = { @JoinColumn(name = "ID_USUARIO", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_PELADA") })
+	@ManyToMany(fetch = FetchType.EAGER)
+	public Set<Pelada> getPeladas() {
+		return peladas;
+	}
+
+	public void setPeladas(Set<Pelada> peladas) {
+		this.peladas = peladas;
+	}
+
+	@JoinTable(name = "TB_USUARIO_ENDERECO", joinColumns = { @JoinColumn(name = "ID_USUARIO", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_ENDERECO") })
+	@ManyToMany(fetch = FetchType.EAGER)
+	public Set<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Column(name = "NOME")

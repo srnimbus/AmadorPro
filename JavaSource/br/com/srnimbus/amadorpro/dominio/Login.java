@@ -1,5 +1,7 @@
 package br.com.srnimbus.amadorpro.dominio;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,6 +29,7 @@ public class Login {
 	private Usuario usuario;
 	private String login;
 	private String senha;
+	private List<Perfil> perfis;
 
 	@Id
 	@Column(name = "ID_LOGIN")
@@ -38,7 +43,7 @@ public class Login {
 	}
 
 	@JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@OneToOne(optional = false, fetch = FetchType.EAGER)
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -47,6 +52,17 @@ public class Login {
 		this.usuario = usuario;
 	}
 
+	//Perfis associados ao login
+	@JoinTable(name = "TB_LOGIN_PERFIL", joinColumns = { @JoinColumn(name = "ID_LOGIN", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_PERFIL") })
+	@ManyToMany(fetch = FetchType.EAGER)
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+	
 	@Column(name = "USUARIO")
 	public String getLogin() {
 		return login;

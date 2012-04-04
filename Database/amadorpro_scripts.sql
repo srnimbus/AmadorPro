@@ -139,6 +139,19 @@ CREATE TABLE public.TB_LOGIN (
 
 ALTER SEQUENCE public.tb_login_id_login_seq OWNED BY public.TB_LOGIN.ID_LOGIN;
 
+CREATE SEQUENCE public.tb_log_login_id_log_login_seq;
+
+CREATE TABLE public.TB_LOG_LOGIN (
+                ID_LOG_LOGIN BIGINT NOT NULL DEFAULT nextval('public.tb_log_login_id_log_login_seq'),
+                ID_LOGIN BIGINT NOT NULL,
+                INFO VARCHAR NOT NULL,
+                DATA_HORA DATE NOT NULL,
+                CONSTRAINT tb_log_login_pk PRIMARY KEY (ID_LOG_LOGIN)
+);
+
+
+ALTER SEQUENCE public.tb_log_login_id_log_login_seq OWNED BY public.TB_LOG_LOGIN.ID_LOG_LOGIN;
+
 CREATE TABLE public.TB_LOGIN_PERFIL (
                 ID_PERFIL BIGINT NOT NULL,
                 ID_LOGIN BIGINT NOT NULL
@@ -230,6 +243,13 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.TB_LOGIN_PERFIL ADD CONSTRAINT tb_login_tb_login_perfil_fk
+FOREIGN KEY (ID_LOGIN)
+REFERENCES public.TB_LOGIN (ID_LOGIN)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.TB_LOG_LOGIN ADD CONSTRAINT tb_login_tb_log_login_fk
 FOREIGN KEY (ID_LOGIN)
 REFERENCES public.TB_LOGIN (ID_LOGIN)
 ON DELETE NO ACTION
