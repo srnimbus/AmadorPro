@@ -99,22 +99,24 @@ public class AmadorProLoginModule implements LoginModule {
 
 		try {
 			authenticated = loginDelegate.isSenhaValida(loginTO);
-			insertLogLogin(loginDelegate.getLoginTO().getId());
 		} catch (AmadorProException e) {
 			e.printStackTrace();
+		} finally{
+			insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
 		}
 
 		return authenticated;
 	}
 
-	private void insertLogLogin(int idLogin) {
+	private void insertLogLogin(int idLogin, boolean authenticated) {
 		ILogLoginDelegate delegate = new LogLoginDelegateImpl();
 		LogLoginTO to = new LogLoginTO();
 
 		to.setIdLogin(idLogin);
 		to.setInfo(JAASHelper.collectDataLogLogin());
 		to.setDataHoraLogin(new Date());
-
+		to.setAutenticado(authenticated);
+		
 		try {
 			delegate.insert(to);
 		} catch (AmadorProBusinessException e) {

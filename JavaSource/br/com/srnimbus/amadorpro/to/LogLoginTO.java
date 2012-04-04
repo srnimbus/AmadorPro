@@ -7,6 +7,15 @@ public class LogLoginTO extends AbstractTO {
 	private int idLogin;
 	private Date dataHoraLogin;
 	private String info;
+	boolean autenticado;
+
+	public boolean isAutenticado() {
+		return autenticado;
+	}
+
+	public void setAutenticado(boolean autenticado) {
+		this.autenticado = autenticado;
+	}
 
 	public int getIdLogin() {
 		return idLogin;

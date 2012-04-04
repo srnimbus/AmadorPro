@@ -24,6 +24,7 @@ public class LogLogin {
 	private int idLogin;
 	private Date dataHoraLogin;
 	private String info;
+	private boolean autenticado;
 
 	@Id
 	@Column(name = "ID_LOG_LOGIN")
@@ -61,6 +62,15 @@ public class LogLogin {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	@Column(name = "AUTENTICADO")
+	public boolean isAutenticado() {
+		return autenticado;
+	}
+
+	public void setAutenticado(boolean autenticado) {
+		this.autenticado = autenticado;
 	}
 
 }

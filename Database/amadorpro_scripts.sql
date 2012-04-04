@@ -146,6 +146,7 @@ CREATE TABLE public.TB_LOG_LOGIN (
                 ID_LOGIN BIGINT NOT NULL,
                 INFO VARCHAR NOT NULL,
                 DATA_HORA DATE NOT NULL,
+                AUTENTICADO BOOLEAN NOT NULL,
                 CONSTRAINT tb_log_login_pk PRIMARY KEY (ID_LOG_LOGIN)
 );
 
