@@ -1,11 +1,17 @@
 package br.com.srnimbus.amadorpro.jaas;
 
+import java.util.Date;
+
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
+import br.com.srnimbus.amadorpro.business.ILogLoginDelegate;
+import br.com.srnimbus.amadorpro.business.impl.LogLoginDelegateImpl;
+import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
+import br.com.srnimbus.amadorpro.to.LogLoginTO;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
-public class JAASHelper {
+public class LoginHelper {
 
 	public static boolean login(LoginTO to) {
 		final String MODULE_NAME = AmadorProLoginModule.class.getName();
@@ -32,6 +38,24 @@ public class JAASHelper {
 		retorno.append("ID Sessao Gerado: ");
 
 		return retorno.toString();
+	}
+	
+	public static void insertLogLogin(int idLogin, boolean authenticated) {
+		ILogLoginDelegate delegate = new LogLoginDelegateImpl();
+		LogLoginTO to = new LogLoginTO();
+
+		to.setIdLogin(idLogin);
+		to.setInfo(LoginHelper.collectDataLogLogin());
+		to.setDataHoraLogin(new Date());
+		to.setAutenticado(authenticated);
+		
+		try {
+			delegate.insert(to);
+		} catch (AmadorProBusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 }

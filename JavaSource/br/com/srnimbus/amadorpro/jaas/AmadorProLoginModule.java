@@ -1,8 +1,6 @@
 package br.com.srnimbus.amadorpro.jaas;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,13 +13,9 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
-import br.com.srnimbus.amadorpro.business.ILogLoginDelegate;
 import br.com.srnimbus.amadorpro.business.ILoginDelegate;
-import br.com.srnimbus.amadorpro.business.impl.LogLoginDelegateImpl;
 import br.com.srnimbus.amadorpro.business.impl.LoginDelegateImpl;
-import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
-import br.com.srnimbus.amadorpro.to.LogLoginTO;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
 public class AmadorProLoginModule implements LoginModule {
@@ -29,9 +23,9 @@ public class AmadorProLoginModule implements LoginModule {
 	private Subject subject;
 	private CallbackHandler callbackHandler;
 	private LoginTO loginTO;
-	private LogLoginTO logLoginTO;
-	private Map sharedState = Collections.<String, Object> emptyMap();
-	private Map options = Collections.<String, Object> emptyMap();
+
+	// private Map sharedState = Collections.<String, Object> emptyMap();
+	// private Map options = Collections.<String, Object> emptyMap();
 
 	/**
 	 * Typically, and definitely with the default Configuration, LoginModules
@@ -56,8 +50,8 @@ public class AmadorProLoginModule implements LoginModule {
 	public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
 		this.subject = subject;
 		this.callbackHandler = callbackHandler;
-		this.sharedState = sharedState;
-		this.options = options;
+		// this.sharedState = sharedState;
+		// this.options = options;
 
 	}
 
@@ -101,29 +95,16 @@ public class AmadorProLoginModule implements LoginModule {
 			authenticated = loginDelegate.isSenhaValida(loginTO);
 		} catch (AmadorProException e) {
 			e.printStackTrace();
-		} finally{
-			insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+		} finally {
+			if (authenticated) {
+				LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+			} else {
+				//LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+				//ajustar para logar a falha no login
+			}
 		}
 
 		return authenticated;
-	}
-
-	private void insertLogLogin(int idLogin, boolean authenticated) {
-		ILogLoginDelegate delegate = new LogLoginDelegateImpl();
-		LogLoginTO to = new LogLoginTO();
-
-		to.setIdLogin(idLogin);
-		to.setInfo(JAASHelper.collectDataLogLogin());
-		to.setDataHoraLogin(new Date());
-		to.setAutenticado(authenticated);
-		
-		try {
-			delegate.insert(to);
-		} catch (AmadorProBusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	/**
@@ -144,6 +125,7 @@ public class AmadorProLoginModule implements LoginModule {
 	public boolean commit() throws LoginException {
 		// remover os principals.
 
+		subject.getPrincipals();
 		if (!authenticated) {
 			// LOGGER.logp(Level.FINEST, CLASS_NAME, "commit()",
 			// "{0} not authenticated.", getUsername());

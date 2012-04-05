@@ -22,20 +22,25 @@ public class LoginDelegateImpl implements ILoginDelegate {
 
 		ILoginDAO loginDAO = new LoginDAOImpl();
 		Login model = new Login();
+		boolean retorno = false;
 		// copia dos objetos
 		try {
 			BeanUtils.copyProperties(model, to);
 			Login login = loginDAO.getLogin(model);
-			if (login != null)
+			if (login != null) {
 				setLoginTO(login);
-			return login.getSenha().equals(to.getSenha());
+				retorno = login.getSenha().equals(to.getSenha());
+				//TODO verificar quantidade de login sem sucesso e gravar no banco para evitar negacao de servico
+				//TODO Captcha?
+			}
+			return retorno;
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
-		return false;
+		return retorno;
 
 	}
 

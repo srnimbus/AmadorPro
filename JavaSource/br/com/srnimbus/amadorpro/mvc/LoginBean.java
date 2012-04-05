@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.beanutils.BeanUtils;
 
 import br.com.srnimbus.amadorpro.jaas.Constants;
-import br.com.srnimbus.amadorpro.jaas.JAASHelper;
+import br.com.srnimbus.amadorpro.jaas.LoginHelper;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
 @ManagedBean(name = "loginBean")
@@ -40,7 +40,7 @@ public class LoginBean {
 		LoginTO to = new LoginTO();
 		BeanUtils.copyProperties(to, this);
 
-		boolean isLogged = JAASHelper.login(to);
+		boolean isLogged = LoginHelper.login(to);
 
 		if (!isLogged) {
 			addMessagePagePanel("Username e/ou Senha Invalidos");
