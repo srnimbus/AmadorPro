@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.jaas.Constants;
 import br.com.srnimbus.amadorpro.jaas.LoginHelper;
 import br.com.srnimbus.amadorpro.to.LoginTO;
@@ -36,16 +37,19 @@ public class LoginBean {
 		this.senha = senha;
 	}
 
-	public String login() throws IllegalAccessException, InvocationTargetException {
+	public String login() throws AmadorProException {
 		LoginTO to = new LoginTO();
-		BeanUtils.copyProperties(to, this);
-
+		try {
+			BeanUtils.copyProperties(to, this);
+		} catch (IllegalAccessException e) {
+			throw new AmadorProException(e);
+		} catch (InvocationTargetException e) {
+			throw new AmadorProException(e);
+		}
 		boolean isLogged = LoginHelper.login(to);
-
 		if (!isLogged) {
 			addMessagePagePanel("Username e/ou Senha Invalidos");
 		}
-
 		return isLogged ? Constants.SUCCESS : Constants.ERROR;
 	}
 

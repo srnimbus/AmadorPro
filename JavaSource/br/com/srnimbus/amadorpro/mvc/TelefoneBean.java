@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 
 import br.com.srnimbus.amadorpro.business.ITelefoneDelegate;
 import br.com.srnimbus.amadorpro.business.impl.TelefoneDelegateImpl;
@@ -40,7 +43,7 @@ public class TelefoneBean extends AbstractBean {
 		BeanUtils.copyProperties(to, this);
 		getDelegate().insert(to);
 		addMessagePagePanel("Telefone inserido com sucesso.");
-
+		
 	}
 
 	@Override
@@ -75,11 +78,13 @@ public class TelefoneBean extends AbstractBean {
 
 	}
 
-	//<p:ajax event="rowSelect" listener="#{enderecoBean.load}" update=":form:panel"/>   
+	// <p:ajax event="rowSelect" listener="#{enderecoBean.load}"
+	// update=":form:panel"/>
 	public void load(SelectEvent selectEvent) throws IllegalAccessException, InvocationTargetException {
 		BeanUtils.copyProperties(this, getSelecionadoTO());
 		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
 	}
+
 	
 	@Override
 	public boolean validateForm() {

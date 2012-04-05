@@ -8,21 +8,24 @@ import javax.security.auth.login.LoginException;
 import br.com.srnimbus.amadorpro.business.ILogLoginDelegate;
 import br.com.srnimbus.amadorpro.business.impl.LogLoginDelegateImpl;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
+import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.to.LogLoginTO;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 
 public class LoginHelper {
 
-	public static boolean login(LoginTO to) {
+	public static boolean login(LoginTO to) throws AmadorProException {
 		final String MODULE_NAME = AmadorProLoginModule.class.getName();
 		// authenticate user
 		boolean authenticated = false;
 		try {
 			LoginContext ctx = new LoginContext(MODULE_NAME, new BundleCallbackHandler(to.getLogin(), to.getSenha()));
 			ctx.login();
+			// ctx.getSubject().getPrincipals()
 			authenticated = true;
 		} catch (LoginException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			throw new AmadorProException(e);
 		}
 
 		return authenticated;
@@ -39,8 +42,8 @@ public class LoginHelper {
 
 		return retorno.toString();
 	}
-	
-	public static void insertLogLogin(int idLogin, boolean authenticated) {
+
+	public static void insertLogLogin(int idLogin, boolean authenticated) throws AmadorProException{
 		ILogLoginDelegate delegate = new LogLoginDelegateImpl();
 		LogLoginTO to = new LogLoginTO();
 
@@ -48,14 +51,13 @@ public class LoginHelper {
 		to.setInfo(LoginHelper.collectDataLogLogin());
 		to.setDataHoraLogin(new Date());
 		to.setAutenticado(authenticated);
-		
+
 		try {
 			delegate.insert(to);
 		} catch (AmadorProBusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProException(e);
 		}
 
 	}
-	
+
 }

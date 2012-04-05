@@ -1,6 +1,6 @@
 --select * from tb_perfil
-insert into tb_perfil values (1, 'Administrador');
-insert into tb_perfil values (2, 'Usuario');
+insert into tb_perfil values (1, 'Administrador', 'br.com.srnimbus.amadorpro.jaas.AdministradorPrincipal.class');
+insert into tb_perfil values (2, 'Usuario', 'br.com.srnimbus.amadorpro.jaas.UsuarioPrincipal.class');
 
 --select * from tb_plano_pagamento
 insert into tb_plano_pagamento values (1, 'Gratuito', '0');

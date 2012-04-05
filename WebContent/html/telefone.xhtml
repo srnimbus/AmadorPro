@@ -46,8 +46,9 @@ body {
 				var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
 				rows="10" selectionMode="single">
 
-				<p:ajax event="rowSelect" listener="#{telefoneBean.load}" update=":form:panel"/>
-				
+				<p:ajax event="rowSelect" listener="#{telefoneBean.load}"
+					update=":form:panel" />
+
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Telefone" />
@@ -73,11 +74,9 @@ body {
 				<h:commandButton value="Update" type="submit" class="btn primary"
 					update="panel" actionListener="#{telefoneBean.update}" />
 				&nbsp;
-				
 				<h:commandButton value="Delete" type="submit" class="btn primary"
 					update="panel" actionListener="#{telefoneBean.delete}" />
-				&nbsp;						
-
+				&nbsp; 
 			</div>
 		</p:panel>
 	</h:form>

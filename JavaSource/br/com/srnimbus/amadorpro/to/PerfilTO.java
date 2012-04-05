@@ -1,10 +1,18 @@
 package br.com.srnimbus.amadorpro.to;
 
-
 public class PerfilTO {
 
 	private int id;
 	private String descricao;
+	private String principal;
+
+	public String getPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(String principal) {
+		this.principal = principal;
+	}
 
 	public int getId() {
 		return id;

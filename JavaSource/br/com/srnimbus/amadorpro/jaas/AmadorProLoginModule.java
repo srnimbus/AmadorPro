@@ -1,6 +1,9 @@
 package br.com.srnimbus.amadorpro.jaas;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.security.Principal;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,12 +20,15 @@ import br.com.srnimbus.amadorpro.business.ILoginDelegate;
 import br.com.srnimbus.amadorpro.business.impl.LoginDelegateImpl;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.to.PerfilTO;
 
 public class AmadorProLoginModule implements LoginModule {
 
 	private Subject subject;
 	private CallbackHandler callbackHandler;
 	private LoginTO loginTO;
+	private Set<Principal> principalsAdded;
+	static private final Class<?>[] STR_ARG = new Class[] { String.class };
 
 	// private Map sharedState = Collections.<String, Object> emptyMap();
 	// private Map options = Collections.<String, Object> emptyMap();
@@ -87,20 +93,26 @@ public class AmadorProLoginModule implements LoginModule {
 		}
 
 		ILoginDelegate loginDelegate = new LoginDelegateImpl();
-		loginTO = new LoginTO();
-		loginTO.setLogin(nameCB.getName());
-		loginTO.setSenha(String.valueOf(passwordCB.getPassword()));
+		LoginTO to = new LoginTO();
+		to.setLogin(nameCB.getName());
+		to.setSenha(String.valueOf(passwordCB.getPassword()));
 
 		try {
-			authenticated = loginDelegate.isSenhaValida(loginTO);
+			authenticated = loginDelegate.isSenhaValida(to);
 		} catch (AmadorProException e) {
 			e.printStackTrace();
 		} finally {
 			if (authenticated) {
-				LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+				try {
+					LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+					loginTO = loginDelegate.getLoginTO();
+				} catch (AmadorProException e) {
+					new LoginException(e.getMessage());
+				}
 			} else {
-				//LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
-				//ajustar para logar a falha no login
+				// LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(),
+				// authenticated);
+				// ajustar para logar a falha no login
 			}
 		}
 
@@ -119,30 +131,46 @@ public class AmadorProLoginModule implements LoginModule {
 	 * 
 	 */
 
-	private Set<?> principalsAdded;
+
 
 	@Override
 	public boolean commit() throws LoginException {
-		// remover os principals.
 
-		subject.getPrincipals();
-		if (!authenticated) {
-			// LOGGER.logp(Level.FINEST, CLASS_NAME, "commit()",
-			// "{0} not authenticated.", getUsername());
+		// apesar deste metodo ser chamado apenas no sucesso do login verifico
+		// se autenticado para garantir.
+
+		if (authenticated) {
+			try {
+				//principalsAdded.addAll(resolvePrincipal());
+				//subject.getPrincipals().addAll(principalsAdded);
+			} catch (Exception e) {
+				e.printStackTrace();
+				new LoginException(e.getMessage());
+			}
+
+			loginTO = null;
+			return true;
+		} else {
+			// usar o log para informar se o login não obteve sucesso.
 			return false;
 		}
-		// set credential
-		// DbUsernameCredential cred = new DbUsernameCredential(userId,
-		// username);
-		// subject.getPublicCredentials().add(cred);
-		// lookup user groups, add to Subject
-		// Set principals = lookupGroups(username);
-		// LOGGER.logp(Level.FINEST, CLASS_NAME, "commit()",
-		// "Loaded Principals {0}", principals);
-		// subject.getPrincipals().addAll(principals);
-		// principalsAdded = new HashSet();
-		// principalsAdded.addAll(principals);
-		return true;
+	}
+
+	private Set<Principal> resolvePrincipal() throws Exception {
+		Set<Principal> principalSet = new HashSet<Principal>();
+		
+		for (PerfilTO to : loginTO.getPerfisTO()) {
+			//Class<?> clazz = Class.forName(to.getPrincipal());
+			Thread t = Thread.currentThread(); 
+	        ClassLoader klzLoader = t.getContextClassLoader(); 
+	        Class<?> klazz = klzLoader.loadClass("AdministradorPrincipal.class");
+	       // Class<?> klazz = klzLoader.loadClass(to.getPrincipal());
+			if (Principal.class.isAssignableFrom(klazz)) {
+				Constructor<?> c = klazz.getConstructor(STR_ARG);
+				principalSet.add((Principal) c.newInstance(new Object[] { to.getDescricao() }));
+			}
+		}
+		return principalSet;
 	}
 
 	/**

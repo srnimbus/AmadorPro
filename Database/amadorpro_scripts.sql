@@ -105,6 +105,7 @@ CREATE SEQUENCE public.tb_perfil_id_perfil_seq;
 CREATE TABLE public.TB_PERFIL (
                 ID_PERFIL BIGINT NOT NULL DEFAULT nextval('public.tb_perfil_id_perfil_seq'),
                 DESC_PERFIL VARCHAR NOT NULL,
+                PRINCIPAL VARCHAR NOT NULL,
                 CONSTRAINT tb_perfil_pk PRIMARY KEY (ID_PERFIL)
 );
 

@@ -1,7 +1,5 @@
 package br.com.srnimbus.amadorpro.exception.handler;
 
-import java.util.Iterator;
-
 import javax.faces.FacesException;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;
@@ -25,14 +23,15 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 	@Override
 	public void handle() throws FacesException {
 		// Iterate over all unhandeled exceptions
-		Iterator<ExceptionQueuedEvent> i = getUnhandledExceptionQueuedEvents().iterator();
-		
-		for(ExceptionQueuedEvent event: getUnhandledExceptionQueuedEvents()){
+		// Iterator<ExceptionQueuedEvent> i =
+		// getUnhandledExceptionQueuedEvents().iterator();
+
+		for (ExceptionQueuedEvent event : getUnhandledExceptionQueuedEvents()) {
 			ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) event.getSource();
-			
+
 			// obtain throwable object
 			Throwable t = context.getException();
-
+			System.out.println(t.getStackTrace());
 			// here you do what ever you want with exception
 			try {
 				// log error
@@ -40,7 +39,7 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 				// redirect to error view etc....
 			} finally {
 				// after exception is handeled, remove it from queue
-				//i.remove();
+				// i.remove();
 			}
 		}
 		// let the parent handle the rest
