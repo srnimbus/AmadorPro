@@ -8,7 +8,6 @@ import javax.faces.event.ExceptionQueuedEventContext;
 
 public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 
-	// private static Log log = LogFactory.getLog(MyExceptionHandler.class);
 	private ExceptionHandler wrapped;
 
 	public AmadorProExceptionHandler(ExceptionHandler wrapped) {
@@ -16,15 +15,12 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 	}
 
 	@Override
-	public ExceptionHandler getWrapped() {
+	public ExceptionHandler getWrapped() { 
 		return wrapped;
 	}
 
 	@Override
 	public void handle() throws FacesException {
-		// Iterate over all unhandeled exceptions
-		// Iterator<ExceptionQueuedEvent> i =
-		// getUnhandledExceptionQueuedEvents().iterator();
 
 		for (ExceptionQueuedEvent event : getUnhandledExceptionQueuedEvents()) {
 			ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) event.getSource();
@@ -42,7 +38,6 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 				// i.remove();
 			}
 		}
-		// let the parent handle the rest
 		getWrapped().handle();
 	}
 
