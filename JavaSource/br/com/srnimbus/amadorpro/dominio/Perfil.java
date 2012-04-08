@@ -18,7 +18,6 @@ public class Perfil {
 
 	private int id;
 	private String descricao;
-	private String principal;
 	
 	@Id
 	@Column(name = "ID_PERFIL")
@@ -37,16 +36,5 @@ public class Perfil {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	@Column(name = "PRINCIPAL")
-	public String getPrincipal() {
-		return principal;
-	}
-	public void setPrincipal(String principal) {
-		this.principal = principal;
-	}
-	
-	
-	
 	
 }

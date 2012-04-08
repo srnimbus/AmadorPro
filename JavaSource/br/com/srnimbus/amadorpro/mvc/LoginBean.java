@@ -8,6 +8,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.errors.AuthenticationException;
 
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.jaas.Constants;
@@ -49,6 +51,13 @@ public class LoginBean {
 		boolean isLogged = LoginHelper.login(to);
 		if (!isLogged) {
 			addMessagePagePanel("Username e/ou Senha Invalidos");
+		} else {
+			try {
+				// troca o identificador de sessao
+				ESAPI.httpUtilities().changeSessionIdentifier();
+			} catch (AuthenticationException e) {
+				throw new AmadorProException(e);
+			}
 		}
 		return isLogged ? Constants.SUCCESS : Constants.ERROR;
 	}

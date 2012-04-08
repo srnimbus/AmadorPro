@@ -8,6 +8,8 @@ import org.primefaces.component.submenu.Submenu;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
+import br.com.srnimbus.amadorpro.jaas.Constants;
+
 @ManagedBean(name = "menuController")
 @RequestScoped
 public class MenuController {
@@ -23,22 +25,23 @@ public class MenuController {
 
 		// First submenu
 		Submenu submenu = new Submenu();
-		submenu.setLabel("Dynamic Submenu 1");
+		submenu.setLabel("Dados Pessoais");
 
 		MenuItem item = new MenuItem();
-		item.setValue("Dynamic Menuitem 1.1");
-		item.setUrl("#");
+		item.setValue("Atualizar Endereco");
+		item.setUrl(Constants.LINK_ENDERECO);
+		//item.setUpdate(Constants.UPDATE_CENTER);
 		submenu.getChildren().add(item);
 
 		menuModel.addSubmenu(submenu);
 
 		// Second submenu
 		submenu = new Submenu();
-		submenu.setLabel("Dynamic Submenu 2");
+		submenu.setLabel("Peladas");
 
 		item = new MenuItem();
-		item.setValue("Dynamic Menuitem 2.1");
-		item.setUrl("#");
+		item.setValue("Agenda");
+		item.setUrl(Constants.LINK_AGENDA);
 		submenu.getChildren().add(item);
 
 		item = new MenuItem();

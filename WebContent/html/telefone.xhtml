@@ -1,85 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Amador Pro</title>
-	<script src="js/jquery.js"></script>
-	<script src="js/alerts.js"></script>
-	<script src="js/modal.js"></script>
-	<script src="js/tabs.js"></script>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<link href="css/style.css" rel="stylesheet" />
-	<style type="text/css">
-body {
-	padding-top: 60px;
-}
-</style>
-</h:head>
-
-<h:body>
-	<h:form id="form">
-		<p:panel id="panel" header="Telefone">
-			<p:messages id="msgs" />
-			<div class="clearfix">
-				<label for="xlInput">Telefone</label>
-				<div class="input">
-					<h:inputText id="telefone" name="telefone"
-						value="#{telefoneBean.telefone}" size="30" styleClass="xlarge" />
+	<!--  <ui:define name="principal"> -->
+			<p:panel id="panel" header="Telefone">
+				<p:messages id="msgs" />
+				<div class="clearfix">
+					<label for="xlInput">Telefone</label>
+					<div class="input">
+						<h:inputText id="telefone" name="telefone"
+							value="#{telefoneBean.telefone}" size="30" styleClass="xlarge" />
+					</div>
 				</div>
-			</div>
-
-			<div class="clearfix">
-				<label for="xlInput">Principal</label>
-				<div class="input">
-					<h:selectBooleanCheckbox id="principal" name="principal"
-						value="#{telefoneBean.principal}" />
+				<div class="clearfix">
+					<label for="xlInput">Principal</label>
+					<div class="input">
+						<h:selectBooleanCheckbox id="principal" name="principal"
+							value="#{telefoneBean.principal}" />
+					</div>
 				</div>
-			</div>
+				<p:dataTable id="telefoneTable" value="#{telefoneBean.dataModel}"
+					var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
+					rows="10" selectionMode="single">
 
+					<p:ajax event="rowSelect" listener="#{telefoneBean.load}" update=":formDef:tabView:panel" />
 
-			<p:dataTable id="telefoneTable" value="#{telefoneBean.dataModel}"
-				var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
-				rows="10" selectionMode="single">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Telefone" />
+						</f:facet>
+						<h:outputText value="#{to.telefone}" />
+					</p:column>
 
-				<p:ajax event="rowSelect" listener="#{telefoneBean.load}"
-					update=":form:panel" />
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Principal" />
+						</f:facet>
+						<h:outputText value="#{to.principal}" />
+					</p:column>
+				</p:dataTable>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Telefone" />
-					</f:facet>
-					<h:outputText value="#{to.telefone}" />
-				</p:column>
-
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Principal" />
-					</f:facet>
-					<h:outputText value="#{to.principal}" />
-				</p:column>
-			</p:dataTable>
-
-			<div class="actions">
-				<h:commandButton value="Insert" type="submit" class="btn primary"
-					update="panel" actionListener="#{telefoneBean.insert}" />
-				&nbsp;
-				<h:commandButton value="Find All" type="submit" class="btn primary"
-					update="panel" actionListener="#{telefoneBean.findAll}" />
-				&nbsp;
-				<h:commandButton value="Update" type="submit" class="btn primary"
-					update="panel" actionListener="#{telefoneBean.update}" />
-				&nbsp;
-				<h:commandButton value="Delete" type="submit" class="btn primary"
-					update="panel" actionListener="#{telefoneBean.delete}" />
-				&nbsp; 
-			</div>
-		</p:panel>
-	</h:form>
-	<p>© Amador Pro - All Lefts Deserved</p>
-</h:body>
-</html>
+				<div class="actions">
+					<h:commandButton value="Insert" type="submit" class="btn primary"
+						update="panel" actionListener="#{telefoneBean.insert}" />
+					<h:commandButton value="Find All" type="submit" class="btn primary"
+						update="panel" actionListener="#{telefoneBean.findAll}" />
+					<h:commandButton value="Update" type="submit" class="btn primary"
+						update="panel" actionListener="#{telefoneBean.update}" />
+					<h:commandButton value="Delete" type="submit" class="btn primary"
+						update="panel" actionListener="#{telefoneBean.delete}" />
+				</div>
+			</p:panel>
+	<!-- </ui:define>  -->
+</ui:composition>
