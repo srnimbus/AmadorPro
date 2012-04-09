@@ -14,11 +14,13 @@ public class MainPageBean {
 
 	private LoginTO loginTO;
 	private UsuarioTO usuarioTO;
-	
+
 	public MainPageBean() {
 
 		loginTO = (LoginTO) FacesUtil.getSession(false).getAttribute(Constants.SESSION_USER);
-		usuarioTO = loginTO.getUsuarioTO();
+		if (loginTO != null) {
+			usuarioTO = loginTO.getUsuarioTO();
+		}
 
 	}
 
@@ -37,7 +39,5 @@ public class MainPageBean {
 	public void setUsuarioTO(UsuarioTO usuarioTO) {
 		this.usuarioTO = usuarioTO;
 	}
-	
-	
 
 }
