@@ -1,5 +1,8 @@
 package br.com.srnimbus.amadorpro.mvc;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -9,99 +12,88 @@ import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
 import br.com.srnimbus.amadorpro.jaas.Constants;
+import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.to.MenuTO;
+import br.com.srnimbus.amadorpro.to.PerfilTO;
+import br.com.srnimbus.amadorpro.to.SubMenuTO;
+import br.com.srnimbus.amadorpro.util.FacesUtil;
 
 @ManagedBean(name = "menuController")
 @RequestScoped
 public class MenuController {
 
 	private MenuModel menuModel;
+	private Set<MenuTO> listaMenus;
 
 	public MenuController() {
+		LoginTO loginTO = (LoginTO) FacesUtil.getSession(false).getAttribute(Constants.SESSION_USER);
+		if (loginTO != null) {
+			for (PerfilTO to : loginTO.getPerfisTO()) {
+				getListaMenus().addAll(to.getMenusTO());
+			}
+		}
 		generateMenu();
 	}
 
 	private void generateMenu() {
 		menuModel = new DefaultMenuModel();
 
+		for (MenuTO menu : getListaMenus()) {
+			Submenu submenu = new Submenu();
+			submenu.setLabel(menu.getNome());
+			for(SubMenuTO to: menu.getSubMenusTO()){
+				MenuItem item = new MenuItem();
+				item.setValue(to.getNome());
+				item.setUrl(to.getLink());
+				submenu.getChildren().add(item);
+			}
+			menuModel.addSubmenu(submenu);
+		}
+
 		// First submenu
-		Submenu submenu = new Submenu();
-		submenu.setLabel("Dados Pessoais");
-
-		MenuItem item = new MenuItem();
-		item.setValue("Atualizar Endereco");
-		item.setUrl(Constants.LINK_ENDERECO);
-		submenu.getChildren().add(item);
-
-		item = new MenuItem();
-		item.setValue("Atualizar Telefone");
-		item.setUrl(Constants.LINK_TELEFONE);
-		submenu.getChildren().add(item);
-
-		menuModel.addSubmenu(submenu);
-
-		// Second submenu
-		submenu = new Submenu();
-		submenu.setLabel("Peladas");
-
-		item = new MenuItem();
-		item.setValue("Agenda");
-		item.setUrl(Constants.LINK_AGENDA);
-		submenu.getChildren().add(item);
-
-		item = new MenuItem();
-		item.setValue("Dynamic Menuitem 2.2");
-		item.setUrl("#");
-		submenu.getChildren().add(item);
-
-		menuModel.addSubmenu(submenu);
+//		Submenu submenu = new Submenu();
+//		submenu.setLabel("Dados Pessoais");
+//
+//		MenuItem item = new MenuItem();
+//
+//		item = new MenuItem();
+//		item.setValue("Atualizar Telefone");
+//		item.setUrl(Constants.LINK_TELEFONE);
+//		submenu.getChildren().add(item);
+//
+//		menuModel.addSubmenu(submenu);
+//
+//		// Second submenu
+//		submenu = new Submenu();
+//		submenu.setLabel("Peladas");
+//
+//		item = new MenuItem();
+//		item.setValue("Agenda");
+//		item.setUrl(Constants.LINK_AGENDA);
+//		submenu.getChildren().add(item);
+//
+//		item = new MenuItem();
+//		item.setValue("Dynamic Menuitem 2.2");
+//		item.setUrl("#");
+//		submenu.getChildren().add(item);
+//
+//		menuModel.addSubmenu(submenu);
 	}
-
-	// private MenuDAO menuDAO = new MenuDAO();
-
-	// public void geraMenu() {
-	// menuModel = new DefaultMenuModel();
-	// List<Menu> listaMenu = menuDAO.listaTodos();
-	// for (Menu menu : listaMenu) {
-	// if (menu.getMenu().getId() == 0) {
-	// Submenu submenu = new Submenu();
-	// submenu.setLabel(menu.getDescricao());
-	// for (Menu m : menuDAO.buscaPorMenu(menu)) {
-	// if (!menuDAO.verificaSubMenu(m)) {
-	// MenuItem mi = new MenuItem();
-	// mi.setValue(m.getDescricao());
-	// mi.setIcon("imagens/" + m.getIcone());
-	// submenu.getChildren().add(mi);
-	// } else {
-	// Submenu sm = new Submenu();
-	// sm.setLabel(m.getDescricao());
-	// sm = geraSubmenu(m);
-	// submenu.getChildren().add(sm);
-	// }
-	// }
-	// menuModel.addSubmenu(submenu);
-	// }
-	// }
-	// }
-	//
-	// public Submenu geraSubmenu(Menu menu) {
-	// Submenu submenu = new Submenu();
-	// submenu.setLabel(menu.getDescricao());
-	// for (Menu m : menuDAO.buscaPorMenu(menu)) {
-	// if (!menuDAO.verificaSubMenu(m)) {
-	// MenuItem mi = new MenuItem();
-	// mi.setValue(m.getDescricao());
-	// mi.setStyle("width:100px");
-	// submenu.getChildren().add(mi);
-	// } else {
-	// submenu.getChildren().add(geraSubmenu(m));
-	// }
-	// }
-	// return submenu;
-	// }
 
 	public MenuModel getMenuModel() {
 		return menuModel;
 
+	}
+
+	public Set<MenuTO> getListaMenus() {
+		if (listaMenus == null) {
+			listaMenus = new HashSet<MenuTO>();
+		}
+		return listaMenus;
+	}
+
+	public void setListaMenus(Set<MenuTO> listaMenus) {
+		this.listaMenus = listaMenus;
 	}
 
 }

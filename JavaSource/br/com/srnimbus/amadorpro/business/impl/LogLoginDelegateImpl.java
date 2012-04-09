@@ -22,19 +22,13 @@ public class LogLoginDelegateImpl implements ILogLoginDelegate {
 
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().insert(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return true;
 	}

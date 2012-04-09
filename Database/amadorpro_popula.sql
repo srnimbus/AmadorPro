@@ -14,3 +14,13 @@ insert into tb_login values (1, 1, 'drispoli', '12345678');
 --select * from tb_login_perfil
 insert into tb_login_perfil values (1, 1);
 insert into tb_login_perfil values (2, 1);
+
+--select * from tb_menu
+insert into tb_menu values (1, 2, 'Dados Pessoais', '', true);
+insert into tb_menu values (2, 2, 'Pelada', '', true);
+
+--select * from tb_submenu
+
+insert into tb_submenu values (1, 1, 'Telefone', '/html/telefone.xhtml', true);
+insert into tb_submenu values (2, 1, 'Endereco', '/html/endereco.xhtml', true);
+insert into tb_submenu values (3, 2, 'Agenda', '/html/agenda.xhtml', true);

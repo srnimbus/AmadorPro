@@ -1,6 +1,6 @@
 package br.com.srnimbus.amadorpro.dominio;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +29,7 @@ public class Login {
 	private Usuario usuario;
 	private String login;
 	private String senha;
-	private List<Perfil> perfis;
+	private Set<Perfil> perfis;
 
 	@Id
 	@Column(name = "ID_LOGIN")
@@ -52,17 +52,17 @@ public class Login {
 		this.usuario = usuario;
 	}
 
-	//Perfis associados ao login
+	// Perfis associados ao login
 	@JoinTable(name = "TB_LOGIN_PERFIL", joinColumns = { @JoinColumn(name = "ID_LOGIN", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_PERFIL") })
 	@ManyToMany(fetch = FetchType.EAGER)
-	public List<Perfil> getPerfis() {
+	public Set<Perfil> getPerfis() {
 		return perfis;
 	}
 
-	public void setPerfis(List<Perfil> perfis) {
+	public void setPerfis(Set<Perfil> perfis) {
 		this.perfis = perfis;
 	}
-	
+
 	@Column(name = "USUARIO")
 	public String getLogin() {
 		return login;

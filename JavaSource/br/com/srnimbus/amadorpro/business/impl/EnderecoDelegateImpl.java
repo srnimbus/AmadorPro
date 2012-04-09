@@ -25,19 +25,14 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().insert(modelo);
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return true;
 	}
@@ -53,19 +48,13 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 		Endereco modelo = new Endereco();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().delete(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return true;
 	}
@@ -75,19 +64,14 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 		Endereco modelo = new Endereco();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().update(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			e1.printStackTrace();
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return null;
 	}
@@ -95,33 +79,22 @@ public class EnderecoDelegateImpl implements IEnderecoDelegate {
 	@Override
 	public List<EnderecoTO> findAll(EnderecoTO to) throws AmadorProBusinessException {
 		Endereco modelo = new Endereco();
+		List<EnderecoTO> lista = new ArrayList<EnderecoTO>();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		List<EnderecoTO> lista = new ArrayList<EnderecoTO>();
-
-		try {
 			for (Object object : getDAO().findAll(modelo)) {
 				EnderecoTO tos = new EnderecoTO();
 				BeanUtils.copyProperties(tos, object);
 				lista.add(tos);
 			}
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			e1.printStackTrace();
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 
 		return lista;

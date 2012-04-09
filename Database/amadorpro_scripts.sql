@@ -117,7 +117,6 @@ CREATE SEQUENCE public.tb_menu_id_menu_seq;
 CREATE TABLE public.TB_MENU (
                 ID_MENU BIGINT NOT NULL DEFAULT nextval('public.tb_menu_id_menu_seq'),
                 ID_PERFIL BIGINT NOT NULL,
-                ID_MENU_1 BIGINT NOT NULL,
                 DESC_MENU VARCHAR NOT NULL,
                 LINK VARCHAR NOT NULL,
                 ATIVO BOOLEAN NOT NULL,
@@ -126,6 +125,16 @@ CREATE TABLE public.TB_MENU (
 
 
 ALTER SEQUENCE public.tb_menu_id_menu_seq OWNED BY public.TB_MENU.ID_MENU;
+
+CREATE TABLE public.TB_SUBMENU (
+                ID_SUBMENU BIGINT NOT NULL,
+                ID_MENU BIGINT NOT NULL,
+                LINK VARCHAR NOT NULL,
+                DESC_SUBMENU VARCHAR NOT NULL,
+                ATIVO BOOLEAN NOT NULL,
+                CONSTRAINT tb_submenu_pk PRIMARY KEY (ID_SUBMENU)
+);
+
 
 CREATE SEQUENCE public.tb_login_id_login_seq;
 
@@ -237,8 +246,8 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.TB_MENU ADD CONSTRAINT tb_menu_tb_menu_fk
-FOREIGN KEY (ID_MENU_1)
+ALTER TABLE public.TB_SUBMENU ADD CONSTRAINT tb_menu_tb_submenu_fk
+FOREIGN KEY (ID_MENU)
 REFERENCES public.TB_MENU (ID_MENU)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION

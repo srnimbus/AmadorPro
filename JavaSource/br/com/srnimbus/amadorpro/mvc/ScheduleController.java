@@ -31,7 +31,7 @@ public class ScheduleController {
 
 	public ScheduleController() {
 		eventModel = new DefaultScheduleModel();
-		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", new Date(), new Date("04/08/2012")));
+		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", new Date(), new Date()));
 
 	}
 

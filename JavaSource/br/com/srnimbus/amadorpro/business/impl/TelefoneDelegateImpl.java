@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 import br.com.srnimbus.amadorpro.business.ITelefoneDelegate;
-import br.com.srnimbus.amadorpro.dominio.Telefone;
 import br.com.srnimbus.amadorpro.dao.ITelefoneDAO;
 import br.com.srnimbus.amadorpro.dao.impl.TelefoneDAOImpl;
+import br.com.srnimbus.amadorpro.dominio.Telefone;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
 import br.com.srnimbus.amadorpro.to.TelefoneTO;

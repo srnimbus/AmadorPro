@@ -14,6 +14,7 @@ import br.com.srnimbus.amadorpro.dao.impl.LoginDAOImpl;
 import br.com.srnimbus.amadorpro.dominio.Login;
 import br.com.srnimbus.amadorpro.dominio.Menu;
 import br.com.srnimbus.amadorpro.dominio.Perfil;
+import br.com.srnimbus.amadorpro.dominio.SubMenu;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.jaas.Constants;
@@ -21,6 +22,7 @@ import br.com.srnimbus.amadorpro.to.LoginTO;
 import br.com.srnimbus.amadorpro.to.MenuTO;
 import br.com.srnimbus.amadorpro.to.PerfilTO;
 import br.com.srnimbus.amadorpro.to.PlanoPagamentoTO;
+import br.com.srnimbus.amadorpro.to.SubMenuTO;
 import br.com.srnimbus.amadorpro.to.UsuarioTO;
 import br.com.srnimbus.amadorpro.util.FacesUtil;
 
@@ -66,8 +68,10 @@ public class LoginDelegateImpl implements ILoginDelegate {
 			List<PerfilTO> listaPerfisTO = new ArrayList<PerfilTO>();
 			for (Perfil perfil : login.getPerfis()) {
 				PerfilTO to = new PerfilTO();
-				BeanUtils.copyProperties(to, perfil);				
-				//to.getMenusTO().addAll(menuToMenuTO(perfil.getMenus()));
+				BeanUtils.copyProperties(to, perfil);
+				if (!perfil.getMenus().isEmpty()) {
+					to.getMenusTO().addAll(menuToMenuTO(perfil.getMenus()));
+				}
 				listaPerfisTO.add(to);
 			}
 			loginTO.setPerfisTO(listaPerfisTO);
@@ -82,16 +86,18 @@ public class LoginDelegateImpl implements ILoginDelegate {
 	private Set<MenuTO> menuToMenuTO(Set<Menu> menuPrincipal) throws AmadorProException {
 		Set<MenuTO> menuTO = new HashSet<MenuTO>();
 		try {
-			//BeanUtils.copyProperties(menuTO, menuPrincipal);
+			// BeanUtils.copyProperties(menuTO, menuPrincipal);
 			for (Menu menu : menuPrincipal) {
 				MenuTO to = new MenuTO();
 				BeanUtils.copyProperties(to, menu);
-				Set<MenuTO> submenusTO = new HashSet<MenuTO>();
-//				for (Menu submenu : menu.getSubmenus()){
-//					MenuTO submenuTO = new MenuTO();
-//					BeanUtils.copyProperties(submenuTO, submenu);
-//					submenusTO.add(submenuTO);
-//				}
+				Set<SubMenuTO> submenusTO = new HashSet<SubMenuTO>();
+				if (!menu.getSubMenus().isEmpty()) {
+					for (SubMenu submenu : menu.getSubMenus()) {
+						SubMenuTO submenuTO = new SubMenuTO();
+						BeanUtils.copyProperties(submenuTO, submenu);
+						submenusTO.add(submenuTO);
+					}
+				}
 				to.setSubmenusTO(submenusTO);
 				menuTO.add(to);
 			}

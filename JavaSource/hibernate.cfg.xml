@@ -3,32 +3,30 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <!-- Propriedades da Conexao -->
-        <!--
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/amadorpro</property>
-        <property name="hibernate.connection.username">amadorpro</property>
-        <property name="connection.password">123456</property>
-        <property name="connection.pool_size">1</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        -->
-        <property name="hibernate.connection.datasource">java:/amadorProDS</property>
-        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
-        <property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="show_sql">true</property>
-        <!-- <property name="hbm2ddl.auto">create</property> -->  
-        <!-- Mapeamento das Classes Dominio -->
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Endereco" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.LocalPelada" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Login" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Pelada" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Perfil" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.PlanoPagamento" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Telefone" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Usuario" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.LogLogin" />
-        <mapping class="br.com.srnimbus.amadorpro.dominio.Menu" />
-    </session-factory>
+	<session-factory>
+		<!-- Propriedades da Conexao -->
+        <!-- <property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
+			<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/amadorpro</property> 
+			<property name="hibernate.connection.username">amadorpro</property> <property 
+			name="connection.password">123456</property> <property name="connection.pool_size">1</property> 
+			<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property> -->
+		<property name="hibernate.connection.datasource">java:/amadorProDS</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
+		<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="show_sql">true</property>
+		<!-- <property name="hbm2ddl.auto">create</property> -->
+		<!-- Mapeamento das Classes Dominio -->
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Endereco" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.LocalPelada" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Login" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Pelada" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Perfil" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.PlanoPagamento" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Telefone" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Usuario" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.LogLogin" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.Menu" />
+		<mapping class="br.com.srnimbus.amadorpro.dominio.SubMenu" />
+	</session-factory>
 </hibernate-configuration>

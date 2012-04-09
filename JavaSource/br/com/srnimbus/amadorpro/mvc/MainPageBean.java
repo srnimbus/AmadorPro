@@ -19,7 +19,7 @@ public class MainPageBean {
 
 		loginTO = (LoginTO) FacesUtil.getSession(false).getAttribute(Constants.SESSION_USER);
 		if (loginTO != null) {
-			usuarioTO = loginTO.getUsuarioTO();
+			setUsuarioTO(loginTO.getUsuarioTO());
 		}
 
 	}

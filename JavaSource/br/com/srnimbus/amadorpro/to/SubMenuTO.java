@@ -1,29 +1,19 @@
 package br.com.srnimbus.amadorpro.to;
 
-import java.util.Set;
 
-public class MenuTO extends AbstractTO {
+public class SubMenuTO extends AbstractTO {
 
 	private String link;
-	private PerfilTO perfilTO;
 	private String nome;
+	private int idMenuPai;
 	private boolean ativo;
-	private Set<SubMenuTO> subMenusTO;
 
-	public PerfilTO getPerfilTO() {
-		return perfilTO;
+	public int getIdMenuPai() {
+		return idMenuPai;
 	}
 
-	public void setPerfilTO(PerfilTO perfilTO) {
-		this.perfilTO = perfilTO;
-	}
-
-	public Set<SubMenuTO> getSubMenusTO() {
-		return subMenusTO;
-	}
-
-	public void setSubmenusTO(Set<SubMenuTO> subMenusTO) {
-		this.subMenusTO = subMenusTO;
+	public void setIdMenuPai(int idMenuPai) {
+		this.idMenuPai = idMenuPai;
 	}
 
 	public String getLink() {

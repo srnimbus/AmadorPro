@@ -100,7 +100,8 @@ public class AmadorProLoginModule implements LoginModule {
 		try {
 			authenticated = loginDelegate.isSenhaValida(to);
 		} catch (AmadorProException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			throw new LoginException(e.getMessage());
 		} finally {
 			if (authenticated) {
 				try {
@@ -131,8 +132,6 @@ public class AmadorProLoginModule implements LoginModule {
 	 * 
 	 */
 
-
-
 	@Override
 	public boolean commit() throws LoginException {
 
@@ -141,10 +140,10 @@ public class AmadorProLoginModule implements LoginModule {
 
 		if (authenticated) {
 			try {
-				//principalsAdded.addAll(resolvePrincipal());
-				//subject.getPrincipals().addAll(principalsAdded);
+				// principalsAdded.addAll(resolvePrincipal());
+				// subject.getPrincipals().addAll(principalsAdded);
 			} catch (Exception e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 				new LoginException(e.getMessage());
 			}
 
@@ -158,13 +157,13 @@ public class AmadorProLoginModule implements LoginModule {
 
 	private Set<Principal> resolvePrincipal() throws Exception {
 		Set<Principal> principalSet = new HashSet<Principal>();
-		
+
 		for (PerfilTO to : loginTO.getPerfisTO()) {
-			//Class<?> clazz = Class.forName(to.getPrincipal());
-			Thread t = Thread.currentThread(); 
-	        ClassLoader klzLoader = t.getContextClassLoader(); 
-	        Class<?> klazz = klzLoader.loadClass("AdministradorPrincipal.class");
-	       // Class<?> klazz = klzLoader.loadClass(to.getPrincipal());
+			// Class<?> clazz = Class.forName(to.getPrincipal());
+			Thread t = Thread.currentThread();
+			ClassLoader klzLoader = t.getContextClassLoader();
+			Class<?> klazz = klzLoader.loadClass("AdministradorPrincipal.class");
+			// Class<?> klazz = klzLoader.loadClass(to.getPrincipal());
 			if (Principal.class.isAssignableFrom(klazz)) {
 				Constructor<?> c = klazz.getConstructor(STR_ARG);
 				principalSet.add((Principal) c.newInstance(new Object[] { to.getDescricao() }));

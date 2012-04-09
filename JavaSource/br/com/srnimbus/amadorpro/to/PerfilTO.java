@@ -1,5 +1,6 @@
 package br.com.srnimbus.amadorpro.to;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class PerfilTO {
@@ -11,6 +12,9 @@ public class PerfilTO {
 	private Set<MenuTO> menusTO;
 
 	public Set<MenuTO> getMenusTO() {
+		if (menusTO == null) {
+			menusTO = new HashSet<MenuTO>();
+		}
 		return menusTO;
 	}
 
