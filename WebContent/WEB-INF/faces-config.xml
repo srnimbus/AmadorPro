@@ -9,7 +9,7 @@
 		<navigation-case>
 			<from-action>#{loginBean.login}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/html/agenda.jsf</to-view-id>
+			<to-view-id>/html/agenda.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{loginBean.login}</from-action>
