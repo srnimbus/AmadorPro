@@ -1,114 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="userpage.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Amador Pro</title>
-	<script src="js/jquery.js"></script>
-	<script src="js/alerts.js"></script>
-	<script src="js/modal.js"></script>
-	<script src="js/tabs.js"></script>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="principal">
 
-	<link href="css/style.css" rel="stylesheet" />
-	<style type="text/css">
-body {
-	padding-top: 60px;
-}
-</style>
-</h:head>
+		<h:form id="form">
+			<p:panel id="panel" header="Local Pelada">
+				<p:messages id="msgs" />
 
-<h:body>
-	<h:form id="form">
-		<p:panel id="panel" header="Endereço">
-			<p:messages id="msgs" />
-			
-			<div class="clearfix">
-				<label for="xlInput">Local</label>
-				<div class="input">
-					<h:inputText id="local" name="local"
-						value="#{localPeladaBean.local}" size="30" styleClass="xlarge" />
+				<div class="clearfix">
+					<label for="xlInput">Local</label>
+					<div class="input">
+						<h:inputText id="local" name="local"
+							value="#{localPeladaBean.local}" size="30" styleClass="xlarge" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="clearfix">
-				<label for="xlInput">Endereço</label>
-				<div class="input">
-					<h:inputText id="endereco" name="endereco"
-						value="#{localPeladaBean.endereco}" size="30" styleClass="xlarge" />
+
+				<div class="clearfix">
+					<label for="xlInput">Endereco</label>
+					<div class="input">
+						<h:inputText id="endereco" name="endereco"
+							value="#{localPeladaBean.endereco}" size="30" styleClass="xlarge" />
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<label for="xlInput">Email</label>
-				<div class="input">
-					<h:inputText id="email" name="email" value="#{localPeladaBean.email}"
-						size="30" styleClass="xlarge" />
+				<div class="clearfix">
+					<label for="xlInput">Email</label>
+					<div class="input">
+						<h:inputText id="email" name="email"
+							value="#{localPeladaBean.email}" size="30" styleClass="xlarge" />
+					</div>
 				</div>
-			</div>
 
-			<div class="clearfix">
-				<label for="xlInput">Telefone</label>
-				<div class="input">
-					<h:inputText id="telefone" name="telefone"
-						value="#{localPeladaBean.telefone}" size="30" styleClass="xlarge" />
+				<div class="clearfix">
+					<label for="xlInput">Telefone</label>
+					<div class="input">
+						<h:inputText id="telefone" name="telefone"
+							value="#{localPeladaBean.telefone}" size="30" styleClass="xlarge" />
+					</div>
 				</div>
-			</div>
+				<br />
 
+				<p:dataTable id="localPeladaTable"
+					value="#{localPeladaBean.dataModel}" var="to"
+					selection="#{localPeladaBean.selecionadoTO}" paginator="true"
+					rows="10" selectionMode="single">
+					<p:ajax event="rowSelect" listener="#{localPeladaBean.load}"
+						update=":form:panel" />
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Local" />
+						</f:facet>
+						<h:outputText value="#{to.local}" />
+					</p:column>
 
-			<p:dataTable id="localPeladaTable" value="#{localPeladaBean.dataModel}"
-				var="to" selection="#{localPeladaBean.selecionadoTO}" paginator="true"
-				rows="10" selectionMode="single">
-				<p:ajax event="rowSelect" listener="#{localPeladaBean.load}" update=":form:panel"/>   
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Local" />
-					</f:facet>
-					<h:outputText value="#{to.local}" />
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Endereco" />
-					</f:facet>
-					<h:outputText value="#{to.endereco}" />
-				</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Endereco" />
+						</f:facet>
+						<h:outputText value="#{to.endereco}" />
+					</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Email" />
-					</f:facet>
-					<h:outputText value="#{to.email}" />
-				</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Email" />
+						</f:facet>
+						<h:outputText value="#{to.email}" />
+					</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Telefone" />
-					</f:facet>
-					<h:outputText value="#{to.telefone}" />
-				</p:column>
-			</p:dataTable>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Telefone" />
+						</f:facet>
+						<h:outputText value="#{to.telefone}" />
+					</p:column>
+				</p:dataTable>
 
-			<div class="actions">
-				<h:commandButton value="Insert" type="submit" class="btn primary"
-					update="panel" actionListener="#{localPeladaBean.insert}" />
-				&nbsp;
-				<h:commandButton value="Find All" type="submit" class="btn primary"
-					update="panel" actionListener="#{localPeladaBean.findAll}" />
-				&nbsp;
-				<h:commandButton value="Update" type="submit" class="btn primary"
-					update="panel" actionListener="#{localPeladaBean.update}" />
-				&nbsp;
-				<h:commandButton value="Delete" type="submit" class="btn primary"
-					update="panel" actionListener="#{localPeladaBean.delete}" />
-				&nbsp;						
-
-			</div>
-		</p:panel>
-	</h:form>
-	<p>© Amador Pro - All Lefts Deserved</p>
-</h:body>
-</html>
+				<div class="actions">
+					<h:commandButton value="Insert" type="submit" class="btn primary"
+						update="panel" actionListener="#{localPeladaBean.insert}" />
+					<h:commandButton value="Find All" type="submit" class="btn primary"
+						update="panel" actionListener="#{localPeladaBean.findAll}" />
+					<h:commandButton value="Update" type="submit" class="btn primary"
+						update="panel" actionListener="#{localPeladaBean.update}" />
+					<h:commandButton value="Delete" type="submit" class="btn primary"
+						update="panel" actionListener="#{localPeladaBean.delete}" />
+				</div>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -20,7 +20,14 @@ insert into tb_menu values (1, 2, 'Dados Pessoais', '', true);
 insert into tb_menu values (2, 2, 'Pelada', '', true);
 
 --select * from tb_submenu
+--delete from tb_submenu
 
-insert into tb_submenu values (1, 1, 'Telefone', '/html/telefone.xhtml', true);
-insert into tb_submenu values (2, 1, 'Endereco', '/html/endereco.xhtml', true);
-insert into tb_submenu values (3, 2, 'Agenda', '/html/agenda.xhtml', true);
+insert into tb_submenu values (1, 1, '/html/telefone.xhtml', 'Telefone',  true);
+insert into tb_submenu values (2, 1, '/html/endereco.xhtml', 'Endereco', true);
+insert into tb_submenu values (3, 2, '/html/agenda.xhtml', 'Agenda', true);
+
+--menu administrador
+insert into tb_menu values (3, 1, 'Administrador', '', true);
+insert into tb_submenu values (4, 3, '/html/localpelada.xhtml', 'Local Pelada', true);
+--update tb_submenu set id_menu = 3 where id_submenu = 4
+
