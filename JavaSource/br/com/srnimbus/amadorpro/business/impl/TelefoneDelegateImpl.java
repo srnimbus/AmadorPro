@@ -25,9 +25,11 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			BeanUtils.copyProperties(modelo, to);
 		} catch (IllegalAccessException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção insert telefone");
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção insert telefone");
 			e1.printStackTrace();
 		}
 
@@ -35,6 +37,7 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			getDAO().insert(modelo);
 		} catch (AmadorProDAOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção insert DAO telefone");
 			e.printStackTrace();
 		}
 		return true;
@@ -47,9 +50,11 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			BeanUtils.copyProperties(modelo, to);
 		} catch (IllegalAccessException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção update telefone");
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção update telefone");
 			e1.printStackTrace();
 		}
 
@@ -57,6 +62,7 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			getDAO().update(modelo);
 		} catch (AmadorProDAOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção update DAO telefone");
 			e.printStackTrace();
 		}
 		return null;
@@ -69,9 +75,11 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			BeanUtils.copyProperties(modelo, to);
 		} catch (IllegalAccessException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção delete telefone");
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção delete telefone");
 			e1.printStackTrace();
 		}
 
@@ -79,6 +87,7 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			getDAO().delete(modelo);
 		} catch (AmadorProDAOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção delete DAO telefone");
 			e.printStackTrace();
 		}
 		return true;
@@ -87,6 +96,7 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 	@Override
 	public TelefoneTO read(TelefoneTO to) throws AmadorProBusinessException {
 		// TODO Auto-generated method stub
+		System.out.println("READ ACESSADO");
 		return null;
 	}
 
@@ -97,9 +107,11 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 			BeanUtils.copyProperties(modelo, to);
 		} catch (IllegalAccessException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção findAll telefone");
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção findAll telefone");
 			e1.printStackTrace();
 		}
 
@@ -112,19 +124,22 @@ public class TelefoneDelegateImpl implements ITelefoneDelegate {
 				lista.add(tos);
 			}
 		} catch (AmadorProDAOException e) {
+			System.out.println("Exceção findAll DAO telefone");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção copia lista telefone");
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exceção copia lista telefone");
 			e.printStackTrace();
 		}
 
 		return lista;
 	}
-	
+
 	public ITelefoneDAO getDAO() {
 		if (dao == null) {
 			dao = new TelefoneDAOImpl();
