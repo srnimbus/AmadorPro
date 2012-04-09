@@ -24,6 +24,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ui-lightness-1.0.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/Owasp.CsrfGuard.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ESAPI"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

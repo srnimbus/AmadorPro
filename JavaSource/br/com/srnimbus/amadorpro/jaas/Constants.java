@@ -6,8 +6,9 @@ public class Constants {
 	public static final String SUCCESS = "success";
 	public static final String UPDATE_CENTER = "upcenter";
 	public static final String UPDATE_MESSAGE = "upmessage";
+	public static final String SESSION_USER = "usuario";
+	public static final String SESSION_PROPERTIES = "propriedades";
 
-	//public static final String ERROR_PAGE = "errorPage";
 	public static final String ERROR_PAGE = "/html/error.xhtml";
 	
 	//Constantes Temporarias

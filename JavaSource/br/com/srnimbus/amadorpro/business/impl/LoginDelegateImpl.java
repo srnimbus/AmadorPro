@@ -13,10 +13,12 @@ import br.com.srnimbus.amadorpro.dominio.Login;
 import br.com.srnimbus.amadorpro.dominio.Perfil;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
+import br.com.srnimbus.amadorpro.jaas.Constants;
 import br.com.srnimbus.amadorpro.to.LoginTO;
 import br.com.srnimbus.amadorpro.to.PerfilTO;
 import br.com.srnimbus.amadorpro.to.PlanoPagamentoTO;
 import br.com.srnimbus.amadorpro.to.UsuarioTO;
+import br.com.srnimbus.amadorpro.util.FacesUtil;
 
 public class LoginDelegateImpl implements ILoginDelegate {
 
@@ -64,7 +66,7 @@ public class LoginDelegateImpl implements ILoginDelegate {
 				listaPerfisTO.add(to);
 			}
 			loginTO.setPerfisTO(listaPerfisTO);
-
+			FacesUtil.setSessionAttribute(Constants.SESSION_USER, usuarioTO);
 		} catch (IllegalAccessException e) {
 			throw new AmadorProException(e);
 		} catch (InvocationTargetException e) {

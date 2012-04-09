@@ -8,6 +8,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.Logger;
+
 import br.com.srnimbus.amadorpro.jaas.Constants;
 
 public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
@@ -41,19 +44,22 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 			try {
 
 				if (t instanceof Exception) {
+					ESAPI.log().error(Logger.EVENT_FAILURE, t.getMessage());
 					nav.handleNavigation(fc, null, Constants.ERROR_PAGE);
 					fc.renderResponse();
+
 				}
 
 				// log error
 				// log.error("Serious error happened!", t);
 				// redirect to error view etc....
+
 			} finally {
-				// after exception is handeled, remove it from queue
-				// i.remove();
+
 			}
 		}
-		getWrapped().handle();
-	}
 
+		// getWrapped().handle();
+
+	}
 }

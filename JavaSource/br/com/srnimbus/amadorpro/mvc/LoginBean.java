@@ -15,6 +15,7 @@ import br.com.srnimbus.amadorpro.exception.AmadorProException;
 import br.com.srnimbus.amadorpro.jaas.Constants;
 import br.com.srnimbus.amadorpro.jaas.LoginHelper;
 import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.util.FacesUtil;
 
 @ManagedBean(name = "loginBean")
 @RequestScoped
@@ -54,7 +55,9 @@ public class LoginBean {
 		} else {
 			try {
 				// troca o identificador de sessao
-				ESAPI.httpUtilities().changeSessionIdentifier();
+				//Logger log = ESAPI.getLogger(this.getClass());
+				ESAPI.httpUtilities().changeSessionIdentifier(FacesUtil.getRequest());
+				System.out.println("depois " + FacesUtil.getRequest().getSession(false).getId());
 			} catch (AuthenticationException e) {
 				throw new AmadorProException(e);
 			}
