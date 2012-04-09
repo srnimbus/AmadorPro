@@ -1,10 +1,22 @@
 package br.com.srnimbus.amadorpro.to;
 
+import java.util.Set;
+
 public class PerfilTO {
 
 	private int id;
 	private String descricao;
 	private String principal;
+
+	private Set<MenuTO> menusTO;
+
+	public Set<MenuTO> getMenusTO() {
+		return menusTO;
+	}
+
+	public void setMenusTO(Set<MenuTO> menusTO) {
+		this.menusTO = menusTO;
+	}
 
 	public String getPrincipal() {
 		return principal;

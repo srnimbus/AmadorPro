@@ -28,7 +28,7 @@ public class Menu {
 	private int id;
 	private List<Menu> submenus;
 	private String link;
-	//private Perfil perfil;
+	private Perfil perfil;
 	private String nome;
 	private boolean ativo;
 	
@@ -45,7 +45,7 @@ public class Menu {
 	}
 
 	@JoinColumn(name = "ID_MENU_PAI", referencedColumnName = "ID_MENU_PAI", insertable = false, updatable = false)
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	public List<Menu> getSubmenus() {
 		return submenus;
 	}
@@ -63,6 +63,15 @@ public class Menu {
 		this.link = link;
 	}
 
+	@Column(name = "ID_PERFIL")
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+	
 	@Column(name = "DESC_MENU")
 	public String getNome() {
 		return nome;
