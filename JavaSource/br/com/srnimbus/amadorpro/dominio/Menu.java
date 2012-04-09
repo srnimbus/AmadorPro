@@ -43,8 +43,8 @@ public class Menu {
 		this.id = id;
 	}
 
-	@JoinColumn(name = "ID_MENU_1", insertable = true, updatable = true, nullable = true)
-	@OneToMany(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "ID_MENU_1", insertable = true, updatable = true, nullable = true)
+//	@OneToMany(fetch = FetchType.EAGER)
 	public Set<Menu> getSubmenus() {
 		return submenus;
 	}
