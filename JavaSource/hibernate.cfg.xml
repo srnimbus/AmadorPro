@@ -29,5 +29,6 @@
         <mapping class="br.com.srnimbus.amadorpro.dominio.Telefone" />
         <mapping class="br.com.srnimbus.amadorpro.dominio.Usuario" />
         <mapping class="br.com.srnimbus.amadorpro.dominio.LogLogin" />
+        <mapping class="br.com.srnimbus.amadorpro.dominio.Menu" />
     </session-factory>
 </hibernate-configuration>

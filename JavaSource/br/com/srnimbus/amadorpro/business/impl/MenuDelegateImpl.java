@@ -6,130 +6,99 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import br.com.srnimbus.amadorpro.business.IEnderecoDelegate;
-import br.com.srnimbus.amadorpro.dao.IEnderecoDAO;
-import br.com.srnimbus.amadorpro.dao.impl.EnderecoDAOImpl;
-import br.com.srnimbus.amadorpro.dominio.Endereco;
+import br.com.srnimbus.amadorpro.business.IMenuDelegate;
+import br.com.srnimbus.amadorpro.dao.IMenuDAO;
+import br.com.srnimbus.amadorpro.dao.impl.MenuDAOImpl;
+import br.com.srnimbus.amadorpro.dominio.Menu;
 import br.com.srnimbus.amadorpro.exception.AmadorProBusinessException;
 import br.com.srnimbus.amadorpro.exception.AmadorProDAOException;
-import br.com.srnimbus.amadorpro.to.EnderecoTO;
+import br.com.srnimbus.amadorpro.to.MenuTO;
 
-public class MenuDelegateImpl implements IEnderecoDelegate {
+public class MenuDelegateImpl implements IMenuDelegate {
 
-	private IEnderecoDAO dao;
+	private IMenuDAO dao;
 
 	@Override
-	public boolean insert(EnderecoTO to) throws AmadorProBusinessException {
+	public boolean insert(MenuTO to) throws AmadorProBusinessException {
 
-		Endereco modelo = new Endereco();
+		Menu modelo = new Menu();
 
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().insert(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return true;
 	}
 
 	@Override
-	public EnderecoTO read(EnderecoTO to) throws AmadorProBusinessException {
-		EnderecoTO retorno = new EnderecoTO();
+	public MenuTO read(MenuTO to) throws AmadorProBusinessException {
+		MenuTO retorno = new MenuTO();
 		return retorno;
 	}
 
 	@Override
-	public boolean delete(EnderecoTO to) throws AmadorProBusinessException {
-		Endereco modelo = new Endereco();
+	public boolean delete(MenuTO to) throws AmadorProBusinessException {
+		Menu modelo = new Menu();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().delete(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return true;
 	}
 
 	@Override
-	public EnderecoTO update(EnderecoTO to) throws AmadorProBusinessException {
-		Endereco modelo = new Endereco();
+	public MenuTO update(MenuTO to) throws AmadorProBusinessException {
+		Menu modelo = new Menu();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
 			getDAO().update(modelo);
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 		return null;
 	}
 
 	@Override
-	public List<EnderecoTO> findAll(EnderecoTO to) throws AmadorProBusinessException {
-		Endereco modelo = new Endereco();
+	public List<MenuTO> findAll(MenuTO to) throws AmadorProBusinessException {
+		Menu modelo = new Menu();
+		List<MenuTO> lista = new ArrayList<MenuTO>();
 		try {
 			BeanUtils.copyProperties(modelo, to);
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		List<EnderecoTO> lista = new ArrayList<EnderecoTO>();
-
-		try {
 			for (Object object : getDAO().findAll(modelo)) {
-				EnderecoTO tos = new EnderecoTO();
+				MenuTO tos = new MenuTO();
 				BeanUtils.copyProperties(tos, object);
 				lista.add(tos);
 			}
+		} catch (IllegalAccessException e1) {
+			throw new AmadorProBusinessException(e1);
+		} catch (InvocationTargetException e1) {
+			throw new AmadorProBusinessException(e1);
 		} catch (AmadorProDAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new AmadorProBusinessException(e);
 		}
 
 		return lista;
 	}
 
-	public IEnderecoDAO getDAO() {
+	public IMenuDAO getDAO() {
 		if (dao == null) {
-			dao = new EnderecoDAOImpl();
+			dao = new MenuDAOImpl();
 		}
 		return dao;
 	}

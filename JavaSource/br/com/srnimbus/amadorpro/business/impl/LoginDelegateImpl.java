@@ -67,11 +67,11 @@ public class LoginDelegateImpl implements ILoginDelegate {
 			for (Perfil perfil : login.getPerfis()) {
 				PerfilTO to = new PerfilTO();
 				BeanUtils.copyProperties(to, perfil);				
-				to.getMenusTO().addAll(menuToMenuTO(perfil.getMenus()));
+				//to.getMenusTO().addAll(menuToMenuTO(perfil.getMenus()));
 				listaPerfisTO.add(to);
 			}
 			loginTO.setPerfisTO(listaPerfisTO);
-			FacesUtil.setSessionAttribute(Constants.SESSION_USER, usuarioTO);
+			FacesUtil.setSessionAttribute(Constants.SESSION_USER, loginTO);
 		} catch (IllegalAccessException e) {
 			throw new AmadorProException(e);
 		} catch (InvocationTargetException e) {

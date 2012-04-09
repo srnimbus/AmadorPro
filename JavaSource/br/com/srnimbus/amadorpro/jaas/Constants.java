@@ -14,6 +14,7 @@ public class Constants {
 	//Constantes Temporarias
 	public static final String LINK_ENDERECO = "/html/endereco.xhtml";
 	public static final String LINK_AGENDA = "/html/agenda.xhtml";
+	public static final String LINK_TELEFONE = "/html/telefone.xhtml";
 
 	
 	

@@ -30,7 +30,11 @@ public class MenuController {
 		MenuItem item = new MenuItem();
 		item.setValue("Atualizar Endereco");
 		item.setUrl(Constants.LINK_ENDERECO);
-		//item.setUpdate(Constants.UPDATE_CENTER);
+		submenu.getChildren().add(item);
+
+		item = new MenuItem();
+		item.setValue("Atualizar Telefone");
+		item.setUrl(Constants.LINK_TELEFONE);
 		submenu.getChildren().add(item);
 
 		menuModel.addSubmenu(submenu);
@@ -95,7 +99,6 @@ public class MenuController {
 	// return submenu;
 	// }
 
-	
 	public MenuModel getMenuModel() {
 		return menuModel;
 

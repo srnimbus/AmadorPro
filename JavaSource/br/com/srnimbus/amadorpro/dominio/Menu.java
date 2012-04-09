@@ -1,6 +1,6 @@
 package br.com.srnimbus.amadorpro.dominio;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,12 +26,11 @@ public class Menu {
 	// TB_MENU.DESC_MENU
 
 	private int id;
-	private List<Menu> submenus;
+	private Set<Menu> submenus;
 	private String link;
 	private Perfil perfil;
 	private String nome;
 	private boolean ativo;
-	
 
 	@Id
 	@Column(name = "ID_MENU")
@@ -44,13 +43,13 @@ public class Menu {
 		this.id = id;
 	}
 
-	@JoinColumn(name = "ID_MENU_PAI", referencedColumnName = "ID_MENU_PAI", insertable = false, updatable = false)
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	public List<Menu> getSubmenus() {
+	@JoinColumn(name = "ID_MENU_1", insertable = true, updatable = true, nullable = true)
+	@OneToMany(fetch = FetchType.EAGER)
+	public Set<Menu> getSubmenus() {
 		return submenus;
 	}
 
-	public void setSubmenus(List<Menu> submenus) {
+	public void setSubmenus(Set<Menu> submenus) {
 		this.submenus = submenus;
 	}
 
@@ -71,7 +70,7 @@ public class Menu {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	@Column(name = "DESC_MENU")
 	public String getNome() {
 		return nome;
@@ -89,7 +88,5 @@ public class Menu {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
 
 }

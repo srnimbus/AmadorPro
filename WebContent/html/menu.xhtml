@@ -1,19 +1,18 @@
-<ui:composition template="userpage.xhtml"
+<ui:composition 
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<ui:define name="principal">
-		<h:form id="form">
+	 <ui:define name="principal"> 
 			<p:panel id="panel" header="Telefone">
 				<p:messages id="msgs" />
 				<div class="clearfix">
 					<label for="xlInput">Telefone</label>
 					<div class="input">
 						<h:inputText id="telefone" name="telefone"
-							value="#{telefoneBean.telefone}" size="30" />
+							value="#{telefoneBean.telefone}" size="30" styleClass="xlarge" />
 					</div>
 				</div>
 				<div class="clearfix">
@@ -27,9 +26,7 @@
 					var="to" selection="#{telefoneBean.selecionadoTO}" paginator="true"
 					rows="10" selectionMode="single">
 
-					<p:ajax event="rowSelect" listener="#{telefoneBean.load}"
-						update=":form:panel" />
-					<!-- update=":formDef:tabView:panel" /> -->
+					<p:ajax event="rowSelect" listener="#{telefoneBean.load}" update=":formDef:tabView:panel" />
 
 					<p:column>
 						<f:facet name="header">
@@ -47,16 +44,15 @@
 				</p:dataTable>
 
 				<div class="actions">
-					<h:commandButton value="Insert" type="submit" update="panel"
-						actionListener="#{telefoneBean.insert}" />
-					<h:commandButton value="Find All" type="submit" update="panel"
-						actionListener="#{telefoneBean.findAll}" />
-					<h:commandButton value="Update" type="submit" update="panel"
-						actionListener="#{telefoneBean.update}" />
-					<h:commandButton value="Delete" type="submit" update="panel"
-						actionListener="#{telefoneBean.delete}" />
+					<h:commandButton value="Insert" type="submit" 
+						update="panel" actionListener="#{telefoneBean.insert}" />
+					<h:commandButton value="Find All" type="submit" 
+						update="panel" actionListener="#{telefoneBean.findAll}" />
+					<h:commandButton value="Update" type="submit" 
+						update="panel" actionListener="#{telefoneBean.update}" />
+					<h:commandButton value="Delete" type="submit" 
+						update="panel" actionListener="#{telefoneBean.delete}" />
 				</div>
 			</p:panel>
-		</h:form>
-		</ui:define>
+	<!-- </ui:define>  -->
 </ui:composition>

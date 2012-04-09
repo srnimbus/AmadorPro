@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.Logger;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.UploadedFile;
 
 import br.com.srnimbus.amadorpro.business.ITelefoneDelegate;
 import br.com.srnimbus.amadorpro.business.impl.TelefoneDelegateImpl;
@@ -21,6 +20,10 @@ import br.com.srnimbus.amadorpro.to.TelefoneTO;
 @ManagedBean(name = "telefoneBean")
 @SessionScoped
 public class TelefoneBean extends AbstractBean {
+
+	public TelefoneBean() {
+		ESAPI.log().info(Logger.EVENT_SUCCESS, TelefoneBean.class.getName());
+	}
 
 	private int id;
 	private boolean principal;
@@ -43,7 +46,7 @@ public class TelefoneBean extends AbstractBean {
 		BeanUtils.copyProperties(to, this);
 		getDelegate().insert(to);
 		addMessagePagePanel("Telefone inserido com sucesso.");
-		
+
 	}
 
 	@Override
@@ -85,7 +88,6 @@ public class TelefoneBean extends AbstractBean {
 		addMessagePagePanel("Endereço carregado objeto nº " + getSelecionadoTO().getId());
 	}
 
-	
 	@Override
 	public boolean validateForm() {
 		// TODO Auto-generated method stub

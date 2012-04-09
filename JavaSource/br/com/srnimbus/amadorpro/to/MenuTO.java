@@ -4,11 +4,11 @@ import java.util.Set;
 
 public class MenuTO extends AbstractTO {
 
-	private Set<MenuTO> submenusTO;
 	private String link;
 	private PerfilTO perfilTO;
 	private String nome;
 	private boolean ativo;
+	private Set<MenuTO> submenusTO;
 
 	public PerfilTO getPerfilTO() {
 		return perfilTO;
