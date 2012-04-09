@@ -1,16 +1,10 @@
 package br.com.srnimbus.amadorpro.dominio;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,7 +18,7 @@ public class Perfil {
 
 	private int id;
 	private String descricao;
-	private Set<Menu> menus;
+	//private Set<Menu> menus;
 
 	@Id
 	@Column(name = "ID_PERFIL")
@@ -45,15 +39,13 @@ public class Perfil {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	@JoinTable(name = "TB_MENU", joinColumns = { @JoinColumn(name = "ID_PERFIL", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "ID_PERFIL") })
-	@ManyToMany(fetch = FetchType.EAGER)
-	public Set<Menu> getMenus() {
-		return menus;
-	}
 
-	public void setMenus(Set<Menu> menus) {
-		this.menus = menus;
-	}
+	// public Set<Menu> getMenus() {
+	// return menus;
+	// }
+	//
+	// public void setMenus(Set<Menu> menus) {
+	// this.menus = menus;
+	// }
 
 }

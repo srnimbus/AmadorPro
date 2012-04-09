@@ -87,11 +87,11 @@ public class LoginDelegateImpl implements ILoginDelegate {
 				MenuTO to = new MenuTO();
 				BeanUtils.copyProperties(to, menu);
 				Set<MenuTO> submenusTO = new HashSet<MenuTO>();
-				for (Menu submenu : menu.getSubmenus()){
-					MenuTO submenuTO = new MenuTO();
-					BeanUtils.copyProperties(submenuTO, submenu);
-					submenusTO.add(submenuTO);
-				}
+//				for (Menu submenu : menu.getSubmenus()){
+//					MenuTO submenuTO = new MenuTO();
+//					BeanUtils.copyProperties(submenuTO, submenu);
+//					submenusTO.add(submenuTO);
+//				}
 				to.setSubmenusTO(submenusTO);
 				menuTO.add(to);
 			}
