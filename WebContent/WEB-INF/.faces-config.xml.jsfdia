@@ -4,15 +4,14 @@
   SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="success:#{loginBean.login}:#html#userpage.xhtml" NAME="output"
-    PATH="/html/userpage.xhtml" TARGET="rules:#html#userpage.xhtml"
-    TITLE="#{loginBean.login}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success:#{loginBean.login}:#html#agenda.jsf"
+    NAME="output" PATH="/html/agenda.jsf"
+    TARGET="rules:#html#agenda.jsf" TITLE="#{loginBean.login}:success" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="error:#{loginBean.login}:#html#login.xhtml"
     NAME="output1" PATH="/html/login.xhtml"
     TARGET="rules:#html#login.xhtml" TITLE="#{loginBean.login}:error" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#html#userpage.xhtml"
-  PATH="/html/userpage.xhtml" SHAPE="256,289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#html#agenda.jsf" PATH="/html/agenda.jsf"
+  SHAPE="256,289,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
