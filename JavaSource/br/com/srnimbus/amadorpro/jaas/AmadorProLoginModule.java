@@ -16,6 +16,9 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.Logger;
+
 import br.com.srnimbus.amadorpro.business.ILoginDelegate;
 import br.com.srnimbus.amadorpro.business.impl.LoginDelegateImpl;
 import br.com.srnimbus.amadorpro.exception.AmadorProException;
@@ -151,6 +154,7 @@ public class AmadorProLoginModule implements LoginModule {
 			return true;
 		} else {
 			// usar o log para informar se o login não obteve sucesso.
+			ESAPI.log().error(Logger.EVENT_FAILURE, "Problemas no login commit() AmadorProLoginModule");
 			return false;
 		}
 	}
