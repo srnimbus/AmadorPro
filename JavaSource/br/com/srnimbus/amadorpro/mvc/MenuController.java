@@ -41,7 +41,7 @@ public class MenuController {
 		for (MenuTO menu : getListaMenus()) {
 			Submenu submenu = new Submenu();
 			submenu.setLabel(menu.getNome());
-			for(SubMenuTO to: menu.getSubMenusTO()){
+			for (SubMenuTO to : menu.getSubMenusTO()) {
 				MenuItem item = new MenuItem();
 				item.setValue(to.getNome());
 				item.setUrl(to.getLink());
@@ -50,39 +50,10 @@ public class MenuController {
 			menuModel.addSubmenu(submenu);
 		}
 
-		// First submenu
-//		Submenu submenu = new Submenu();
-//		submenu.setLabel("Dados Pessoais");
-//
-//		MenuItem item = new MenuItem();
-//
-//		item = new MenuItem();
-//		item.setValue("Atualizar Telefone");
-//		item.setUrl(Constants.LINK_TELEFONE);
-//		submenu.getChildren().add(item);
-//
-//		menuModel.addSubmenu(submenu);
-//
-//		// Second submenu
-//		submenu = new Submenu();
-//		submenu.setLabel("Peladas");
-//
-//		item = new MenuItem();
-//		item.setValue("Agenda");
-//		item.setUrl(Constants.LINK_AGENDA);
-//		submenu.getChildren().add(item);
-//
-//		item = new MenuItem();
-//		item.setValue("Dynamic Menuitem 2.2");
-//		item.setUrl("#");
-//		submenu.getChildren().add(item);
-//
-//		menuModel.addSubmenu(submenu);
 	}
 
 	public MenuModel getMenuModel() {
 		return menuModel;
-
 	}
 
 	public Set<MenuTO> getListaMenus() {
