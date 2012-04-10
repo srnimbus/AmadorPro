@@ -6,39 +6,43 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html" />
-	<title>Amador Pro</title>
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>Amador Pro</title>
+		</f:facet>		
+	</h:head>
+
+	<h:body>
+		<p:layout fullPage="true">
+
+			<p:layoutUnit position="north" size="60" resizable="false"
+				closable="false" collapsible="false">
+				<h:graphicImage value="/img/amadorProLogo.jpg" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="50" resizable="false"
+				closable="false" collapsible="false">
+				<h:outputText value="© Amador Pro - All Lefts Deserved." />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" size="200" resizable="false"
+				closable="false" collapsible="false">
+				<div>
+					<h:outputText value="#{mainPageBean.usuarioTO.nome}" />
+					<br />
+					<h:outputText value="#{mainPageBean.usuarioTO.apelido}"
+						escape="false" />
+				</div>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<p:menubar model="#{menuController.menuModel}" />
+				<ui:insert name="principal" />
+			</p:layoutUnit>
+		</p:layout>
 	<script src="/amadorpro/JavaScriptServlet"></script>
-</h:head>
-
-<h:body>
-	<p:layout fullPage="true">
-
-		<p:layoutUnit position="north" size="60" resizable="false"
-			closable="false" collapsible="false">
-			<h:graphicImage value="/img/amadorProLogo.jpg" />
-		</p:layoutUnit>
-
-		<p:layoutUnit position="south" size="50" resizable="false"
-			closable="false" collapsible="false">
-			<h:outputText value="© Amador Pro - All Lefts Deserved." />
-		</p:layoutUnit>
-
-		<p:layoutUnit position="west" size="200" resizable="false"
-			closable="false" collapsible="false">
-			<div>
-				<h:outputText value="#{mainPageBean.usuarioTO.nome}" />
-				<br />
-				<h:outputText value="#{mainPageBean.usuarioTO.apelido}"
-					escape="false" />
-			</div>
-		</p:layoutUnit>
-
-		<p:layoutUnit position="center">
-			<p:menubar model="#{menuController.menuModel}" />
-			<ui:insert name="principal" />
-		</p:layoutUnit>
-	</p:layout>
-</h:body>
+	</h:body>
+</f:view>
 </html>
