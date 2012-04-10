@@ -28,9 +28,11 @@
 
 		<p:layoutUnit position="west" size="200" resizable="false"
 			closable="false" collapsible="false">
-			<h:form>
+			<div>
 				<h:outputText value="#{mainPageBean.usuarioTO.nome}" />
-			</h:form>
+				<br />
+				<h:outputText value="#{mainPageBean.usuarioTO.apelido}" escape="false" />				
+			</div>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
