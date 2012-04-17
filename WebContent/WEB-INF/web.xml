@@ -87,5 +87,13 @@
 			<param-value>.*localhost.*</param-value>
 		</init-param>
 	</servlet>
-
+	<!-- redirecionamentos de erros -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/html/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/html/error.xhtml</location>
+	</error-page>
 </web-app>

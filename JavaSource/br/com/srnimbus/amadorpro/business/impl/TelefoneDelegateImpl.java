@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 
 import br.com.srnimbus.amadorpro.business.ITelefoneDelegate;
 import br.com.srnimbus.amadorpro.dao.ITelefoneDAO;
@@ -17,11 +18,15 @@ import br.com.srnimbus.amadorpro.to.TelefoneTO;
 public class TelefoneDelegateImpl implements ITelefoneDelegate {
 	private ITelefoneDAO dao;
 
+	Logger logger = Logger.getLogger(this.getClass());
+	
 	@Override
 	public boolean insert(TelefoneTO to) throws AmadorProBusinessException {
 		Telefone modelo = new Telefone();
 
 		try {
+			logger.info("Tentando inserir telefone");
+			//System.out.println("Tentando inserir telefone");
 			BeanUtils.copyProperties(modelo, to);
 		} catch (IllegalAccessException e1) {
 			// TODO Auto-generated catch block

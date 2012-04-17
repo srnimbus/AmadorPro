@@ -15,6 +15,29 @@ import br.com.srnimbus.amadorpro.jaas.Constants;
 
 public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 
+	@Override
+	public void handle() throws FacesException {
+
+		for (ExceptionQueuedEvent event : getUnhandledExceptionQueuedEvents()) {
+			ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) 
+					event.getSource();
+
+			Throwable t = context.getException();
+			FacesContext fc = FacesContext.getCurrentInstance();
+			NavigationHandler nav = fc.getApplication().getNavigationHandler();
+			try {
+				if (t instanceof Exception) {
+					ESAPI.log().error(Logger.EVENT_FAILURE, t.getMessage());
+					nav.handleNavigation(fc, null, Constants.ERROR_PAGE);
+					fc.renderResponse();
+				}
+			} finally {
+				// getWrapped().handle();
+
+			}
+		} 
+	}
+
 	private ExceptionHandler wrapped;
 
 	public AmadorProExceptionHandler(ExceptionHandler wrapped) {
@@ -26,40 +49,4 @@ public class AmadorProExceptionHandler extends ExceptionHandlerWrapper {
 		return wrapped;
 	}
 
-	@Override
-	public void handle() throws FacesException {
-
-		for (ExceptionQueuedEvent event : getUnhandledExceptionQueuedEvents()) {
-			ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) event.getSource();
-
-			// obtain throwable object
-			Throwable t = context.getException();
-			// System.out.println(t.getStackTrace());
-			FacesContext fc = FacesContext.getCurrentInstance();
-			// Map<String, Object> requestMap =
-			// fc.getExternalContext().getRequestMap();
-			NavigationHandler nav = fc.getApplication().getNavigationHandler();
-
-			// here you do what ever you want with exception
-			try {
-
-				if (t instanceof Exception) {
-					ESAPI.log().error(Logger.EVENT_FAILURE, t.getMessage());
-					nav.handleNavigation(fc, null, Constants.ERROR_PAGE);
-					fc.renderResponse();
-
-				}
-
-				// log error
-				// log.error("Serious error happened!", t);
-				// redirect to error view etc....
-
-			} finally {
-
-			}
-		}
-
-		// getWrapped().handle();
-
-	}
 }
