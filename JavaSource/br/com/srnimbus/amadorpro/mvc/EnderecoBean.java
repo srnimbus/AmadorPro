@@ -84,7 +84,7 @@ public class EnderecoBean extends AbstractBean {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 	
-		String padraoCEP = "^[0-9]{2}( |[-\\.)?[0-9]{3}( |[-\\.)?[0-9]{3}";
+		String padraoCEP = "^[0-9]{2}( |[-\\.])?[0-9]{3}( |[-\\.])?[0-9]{3}";
 		Pattern mask = Pattern.compile(padraoCEP);
 
 		Matcher matcher = mask.matcher(this.cep);
@@ -94,7 +94,7 @@ public class EnderecoBean extends AbstractBean {
 			message.setDetail("CEP inválido!");
 			message.setSummary("CEP inválido! ");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage("enderecoform.cep", message);
+			context.addMessage("form.cep", message);
 			return false;
 		} else return true;
 	}
