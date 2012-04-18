@@ -13,7 +13,9 @@
 					<label for="xlInput">Telefone</label>
 					<div class="input">
 						<h:inputText id="telefone" name="telefone"
-							value="#{telefoneBean.telefone}" size="30" />
+							value="#{telefoneBean.telefone}" size="30" >
+							<f:validator validatorId="srnimbus.TelefoneValidator"/>
+							</h:inputText>
 					</div>
 				</div>
 				<div class="clearfix">

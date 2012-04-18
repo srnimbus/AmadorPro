@@ -2,9 +2,13 @@ package br.com.srnimbus.amadorpro.mvc;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -77,12 +81,22 @@ public class EnderecoBean extends AbstractBean {
 
 	@Override
 	public boolean validateForm() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+	
+		String padraoCEP = "^[0-9]{2}( |[-\\.)?[0-9]{3}( |[-\\.)?[0-9]{3}";
+		Pattern mask = Pattern.compile(padraoCEP);
 
-		if (getSelecionadoTO() != null && getSelecionadoTO().getId() != 0) {
-			return true;
-		} else
-			return true;
+		Matcher matcher = mask.matcher(this.cep);
 
+		if (!matcher.find()) {
+			FacesMessage message = new FacesMessage();
+			message.setDetail("CEP inválido!");
+			message.setSummary("CEP inválido! ");
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage("enderecoform.cep", message);
+			return false;
+		} else return true;
 	}
 
 	// getters and setters
