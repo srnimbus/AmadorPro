@@ -3,24 +3,21 @@ package br.com.srnimbus.amadorpro.jaas;
 import java.security.Principal;
 
 import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.to.PerfilTO;
 
 public class AdministradorPrincipal implements Principal {
 
 	private String name;
 	private int id;
-	
-	public AdministradorPrincipal(int id, String name) {
-		if (name == null || name.length() == 0) {
-			throw new NullPointerException("User group name may not be empty.");
-		}
-		this.name = name;
-	}
+	private LoginTO loginTO;
+	private PerfilTO perfilTO;
 
 	public AdministradorPrincipal(LoginTO loginTO) {
-		if (name == null || name.length() == 0) {
-			throw new NullPointerException("User group name may not be empty.");
+		if (loginTO == null) {
+			throw new NullPointerException("Sem dados para montar o principals.");
 		}
-		this.name = name;
+		this.id = loginTO.getId();
+		this.name = loginTO.getLogin();
 	}
 
 	public int getId() {
@@ -42,6 +39,22 @@ public class AdministradorPrincipal implements Principal {
 
 	public int hashCode() {
 		return getName().hashCode();
+	}
+
+	public LoginTO getLoginTO() {
+		return loginTO;
+	}
+
+	public void setLoginTO(LoginTO loginTO) {
+		this.loginTO = loginTO;
+	}
+
+	public PerfilTO getPerfilTO() {
+		return perfilTO;
+	}
+
+	public void setPerfilTO(PerfilTO perfilTO) {
+		this.perfilTO = perfilTO;
 	}
 
 }

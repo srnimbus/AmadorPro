@@ -3,24 +3,21 @@ package br.com.srnimbus.amadorpro.jaas;
 import java.security.Principal;
 
 import br.com.srnimbus.amadorpro.to.LoginTO;
+import br.com.srnimbus.amadorpro.to.PerfilTO;
 
 public class UsuarioPrincipal implements Principal {
 
 	private String name;
 	private int id;
+	private LoginTO loginTO;
+	private PerfilTO perfilTO;
 	
-	public UsuarioPrincipal(int id, String name) {
-		if (name == null || name.length() == 0) {
-			throw new NullPointerException("User group name may not be empty.");
-		}
-		this.name = name;
-	}
-
 	public UsuarioPrincipal(LoginTO loginTO) {
-		if (name == null || name.length() == 0) {
-			throw new NullPointerException("User group name may not be empty.");
+		if (loginTO == null) {
+			throw new NullPointerException("Sem dados para montar o principals.");
 		}
-		this.name = name;
+		this.id = loginTO.getId();
+		this.name = loginTO.getLogin();
 	}
 
 	public int getId() {
@@ -33,15 +30,32 @@ public class UsuarioPrincipal implements Principal {
 	}
 
 	public boolean equals(Object obj) {
-		if (!(obj instanceof UsuarioPrincipal)) {
+		if (!(obj instanceof AdministradorPrincipal)) {
 			return false;
 		}
-		UsuarioPrincipal other = (UsuarioPrincipal) obj;
+		AdministradorPrincipal other = (AdministradorPrincipal) obj;
 		return getName().equals(other.getName());
 	}
 
 	public int hashCode() {
 		return getName().hashCode();
 	}
+
+	public LoginTO getLoginTO() {
+		return loginTO;
+	}
+
+	public void setLoginTO(LoginTO loginTO) {
+		this.loginTO = loginTO;
+	}
+
+	public PerfilTO getPerfilTO() {
+		return perfilTO;
+	}
+
+	public void setPerfilTO(PerfilTO perfilTO) {
+		this.perfilTO = perfilTO;
+	}
+
 
 }

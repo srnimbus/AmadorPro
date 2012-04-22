@@ -1,9 +1,8 @@
 package br.com.srnimbus.amadorpro.jaas;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.security.Principal;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,10 +30,11 @@ public class AmadorProLoginModule implements LoginModule {
 	private CallbackHandler callbackHandler;
 	private LoginTO loginTO;
 	private Set<Principal> principalsAdded;
-	static private final Class<?>[] STR_ARG = new Class[] { String.class };
 
-	// private Map sharedState = Collections.<String, Object> emptyMap();
-	// private Map options = Collections.<String, Object> emptyMap();
+	@SuppressWarnings({ "rawtypes", "unused" })
+	private Map sharedState = Collections.<String, Object> emptyMap();
+	@SuppressWarnings({ "rawtypes", "unused" })
+	private Map options = Collections.<String, Object> emptyMap();
 
 	/**
 	 * Typically, and definitely with the default Configuration, LoginModules
@@ -56,7 +56,8 @@ public class AmadorProLoginModule implements LoginModule {
 	 */
 
 	@Override
-	public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
+	public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState,
+			Map<String, ?> options) {
 		this.subject = subject;
 		this.callbackHandler = callbackHandler;
 		// this.sharedState = sharedState;
@@ -108,14 +109,11 @@ public class AmadorProLoginModule implements LoginModule {
 			if (authenticated) {
 				try {
 					LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(), authenticated);
+					loginDelegate.getLoginTO().setSenha(null);
 					loginTO = loginDelegate.getLoginTO();
 				} catch (AmadorProException e) {
 					new LoginException(e.getMessage());
 				}
-			} else {
-				// LoginHelper.insertLogLogin(loginDelegate.getLoginTO().getId(),
-				// authenticated);
-				// ajustar para logar a falha no login
 			}
 		}
 
@@ -142,10 +140,8 @@ public class AmadorProLoginModule implements LoginModule {
 
 		if (authenticated) {
 			try {
-				// principalsAdded.addAll(resolvePrincipal());
-				// subject.getPrincipals().addAll(principalsAdded);
+				resolvePrincipal();
 			} catch (Exception e) {
-				// e.printStackTrace();
 				new LoginException(e.getMessage());
 			}
 
@@ -158,21 +154,23 @@ public class AmadorProLoginModule implements LoginModule {
 		}
 	}
 
-	private Set<Principal> resolvePrincipal() throws Exception {
-		Set<Principal> principalSet = new HashSet<Principal>();
+	private final String ADMIN = "admin";
+	private final String USER = "user";
 
+	private void resolvePrincipal() throws Exception {
 		for (PerfilTO to : loginTO.getPerfisTO()) {
-			// Class<?> clazz = Class.forName(to.getPrincipal());
-			Thread t = Thread.currentThread();
-			ClassLoader klzLoader = t.getContextClassLoader();
-			Class<?> klazz = klzLoader.loadClass("AdministradorPrincipal.class");
-			// Class<?> klazz = klzLoader.loadClass(to.getPrincipal());
-			if (Principal.class.isAssignableFrom(klazz)) {
-				Constructor<?> c = klazz.getConstructor(STR_ARG);
-				principalSet.add((Principal) c.newInstance(new Object[] { to.getDescricao() }));
+			if (to.getPrincipal().equals(ADMIN)) {
+				AdministradorPrincipal admin = new AdministradorPrincipal(loginTO);
+				admin.setPerfilTO(to);
+				principalsAdded.add(admin);
+			} else if (to.getPrincipal().equals(USER)) {
+				UsuarioPrincipal user = new UsuarioPrincipal(loginTO);
+				user.setPerfilTO(to);
+				principalsAdded.add(user);
 			}
+
 		}
-		return principalSet;
+		subject.getPrincipals().addAll(principalsAdded);
 	}
 
 	/**
@@ -200,6 +198,7 @@ public class AmadorProLoginModule implements LoginModule {
 
 	@Override
 	public boolean logout() throws LoginException {
+		loginTO = null;
 		if (principalsAdded != null && !principalsAdded.isEmpty()) {
 			subject.getPrincipals().removeAll(principalsAdded);
 		}
