@@ -103,7 +103,6 @@ public class AmadorProLoginModule implements LoginModule {
 		try {
 			authenticated = loginDelegate.isSenhaValida(to);
 		} catch (AmadorProException e) {
-			// e.printStackTrace();
 			throw new LoginException(e.getMessage());
 		} finally {
 			if (authenticated) {

