@@ -3,6 +3,7 @@ package br.com.srnimbus.amadorpro.jaas;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -141,6 +142,7 @@ public class AmadorProLoginModule implements LoginModule {
 		if (authenticated) {
 			try {
 				resolvePrincipal();
+				LoginHelper.getInstance().setSubject(this.subject);
 			} catch (Exception e) {
 				new LoginException(e.getMessage());
 			}
@@ -154,23 +156,23 @@ public class AmadorProLoginModule implements LoginModule {
 		}
 	}
 
-	private final String ADMIN = "admin";
-	private final String USER = "user";
-
 	private void resolvePrincipal() throws Exception {
+		principalsAdded = new HashSet<Principal>();
 		for (PerfilTO to : loginTO.getPerfisTO()) {
-			if (to.getPrincipal().equals(ADMIN)) {
-				AdministradorPrincipal admin = new AdministradorPrincipal(loginTO);
-				admin.setPerfilTO(to);
-				principalsAdded.add(admin);
-			} else if (to.getPrincipal().equals(USER)) {
+			if (to.getPrincipal().equals(Constants.ADMIN)) {
+				AdministradorPrincipal app = new AdministradorPrincipal(loginTO);
+				app.setPerfilTO(to);
+				subject.getPrincipals().add(app);
+				principalsAdded.add(app);
+			} else if (to.getPrincipal().equals(Constants.USER)) {
 				UsuarioPrincipal user = new UsuarioPrincipal(loginTO);
 				user.setPerfilTO(to);
+				subject.getPrincipals().add(user);
 				principalsAdded.add(user);
 			}
 
 		}
-		subject.getPrincipals().addAll(principalsAdded);
+		//subject.getPrincipals().addAll(principalsAdded);
 	}
 
 	/**

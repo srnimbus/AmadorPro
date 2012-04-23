@@ -24,6 +24,7 @@ public class Perfil {
 	private int id;
 	private String descricao;
 	private Set<Menu> menus;
+	private String principal;
 
 	@Id
 	@Column(name = "ID_PERFIL")
@@ -53,6 +54,15 @@ public class Perfil {
 
 	public void setMenus(Set<Menu> menus) {
 		this.menus = menus;
+	}
+	
+	@Column(name = "PRINCIPAL")
+	public String getPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(String principal) {
+		this.principal = principal;
 	}
 
 }

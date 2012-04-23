@@ -12,6 +12,10 @@ public class Constants {
 	public static final String ERROR_PAGE = "/html/error.xhtml";
 	public static final String LOGIN_PAGE = "/html/login.xhtml";
 	
+	//Constantes JAAS
+	public static final String ADMIN = "admin";
+	public static final String USER = "user";
+	
 	//Constantes Temporarias
 	public static final String LINK_ENDERECO = "/html/endereco.xhtml";
 	public static final String LINK_AGENDA = "/html/agenda.xhtml";

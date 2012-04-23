@@ -40,12 +40,13 @@ public class LoginHelper {
 		LoginContext ctx = null;
 		try {
 			ctx = new LoginContext(MODULE_NAME, new BundleCallbackHandler(to.getLogin(), to.getSenha()));
+			ctx.login();
+			authenticated = true;
 		} catch (LoginException e) {
 			throw new AmadorProException(e);
 		} finally {
 			try {
 				if (authenticated)
-					LoginHelper.getInstance().setSubject(ctx.getSubject());
 				ESAPI.httpUtilities().changeSessionIdentifier(FacesUtil.getRequest());
 			} catch (AuthenticationException e) {
 				throw new AmadorProException(e);

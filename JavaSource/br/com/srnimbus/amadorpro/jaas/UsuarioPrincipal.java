@@ -30,10 +30,10 @@ public class UsuarioPrincipal implements Principal {
 	}
 
 	public boolean equals(Object obj) {
-		if (!(obj instanceof AdministradorPrincipal)) {
+		if (!(obj instanceof UsuarioPrincipal)) {
 			return false;
 		}
-		AdministradorPrincipal other = (AdministradorPrincipal) obj;
+		UsuarioPrincipal other = (UsuarioPrincipal) obj;
 		return getName().equals(other.getName());
 	}
 
