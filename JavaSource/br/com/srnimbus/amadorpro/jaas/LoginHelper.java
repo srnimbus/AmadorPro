@@ -2,6 +2,7 @@ package br.com.srnimbus.amadorpro.jaas;
 
 import java.util.Date;
 
+import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
@@ -18,18 +19,33 @@ import br.com.srnimbus.amadorpro.util.FacesUtil;
 
 public class LoginHelper {
 
+	private LoginHelper() {
+	}
+
+	private Subject subject;
+	private static LoginHelper instance;
+	private LoginTO loginTO;
+	
+
+	public static LoginHelper getInstance() {
+		if (instance == null) {
+			instance = new LoginHelper();
+		}
+		return instance;
+	}
+
 	public static boolean login(LoginTO to) throws AmadorProException {
 		final String MODULE_NAME = AmadorProLoginModule.class.getName();
-		// authenticate user
 		boolean authenticated = false;
+		LoginContext ctx = null;
 		try {
-			LoginContext ctx = new LoginContext(MODULE_NAME, new BundleCallbackHandler(to.getLogin(), to.getSenha()));
-			ctx.login();
-			authenticated = true;
+			ctx = new LoginContext(MODULE_NAME, new BundleCallbackHandler(to.getLogin(), to.getSenha()));
 		} catch (LoginException e) {
 			throw new AmadorProException(e);
 		} finally {
 			try {
+				if (authenticated)
+					LoginHelper.getInstance().setSubject(ctx.getSubject());
 				ESAPI.httpUtilities().changeSessionIdentifier(FacesUtil.getRequest());
 			} catch (AuthenticationException e) {
 				throw new AmadorProException(e);
@@ -40,10 +56,9 @@ public class LoginHelper {
 
 	}
 
+
 	public static String collectDataLogLogin() {
 		StringBuffer retorno = new StringBuffer();
-		// TODO Fazer mal-feito para LAB
-		// TODO pegar dados para montar log do request + sessao
 
 		retorno.append("Endereco IP: " + FacesUtil.getRequest().getRemoteHost() + "H ");
 		retorno.append("Endereco IP: " + FacesUtil.getRequest().getRemoteAddr() + "A ");
@@ -69,4 +84,20 @@ public class LoginHelper {
 
 	}
 
+	
+	public LoginTO getLoginTO() {
+		return loginTO;
+	}
+
+	public void setLoginTO(LoginTO loginTO) {
+		this.loginTO = loginTO;
+	}
+	
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
 }
