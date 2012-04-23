@@ -36,7 +36,7 @@ public class AuthenticationFilter implements Filter {
 		String context = req.getContextPath();
 
 		String uri = req.getRequestURI();
-
+		
 		boolean contextAuthorizer = uri.indexOf(LOGIN_PATTERN) >= 0
 				|| uri.indexOf(RESOURCE_PATTERN) >= 0
 				|| uri.indexOf(INDEX_PATTERN) >= 0;
